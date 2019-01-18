@@ -4,7 +4,8 @@
   "description": "Welcome to the craic",
   "author": "Harald Schlindwein",
   "dependencies": {
-    "discord.js": "*"
+    "discord.js": "*",
+    "request": "2.81.0"
   },
   "scripts": {
     "start": "node craic_me_up.js"

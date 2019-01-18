@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const auth = require('./auth.json');
+const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
 
 client.on('ready', () => {
@@ -51,4 +51,4 @@ client.on('message', msg => {
 });
 
 console.log('Diving in now...');
-client.login(auth.token);
+client.login(authToken);
