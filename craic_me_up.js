@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
 const whois = require('./commands/whois').whois;
-const addNick = require('./commands/whois').add;
+const addNick = require('./commands/whois').addNick;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
