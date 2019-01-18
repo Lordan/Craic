@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
 const whois = require('./commands/whois').whois;
-const iam = require('./commands/whois').add;
+const addNick = require('./commands/whois').add;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -50,7 +50,7 @@ client.on('message', msg => {
 			whois(msg, args);
 		break;
 		case 'iam':
-			iam(msg, args);
+			addNick(msg, args);
 		break;
         default:
             msg.reply("No effing clue what you're talking about, " + author.username + ". What you mean by '" + cmd + "'?")

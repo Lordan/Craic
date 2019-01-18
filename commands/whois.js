@@ -8,7 +8,7 @@ function whois(msg, args) {
 		.catch(console.error);
 }
 
-function add(msg, args) {
+function addNick(msg, args) {
 	if (msg === null) return;
 	msg.author.createDM()
 		.then((dmChannel) => {
@@ -19,4 +19,4 @@ function add(msg, args) {
 }
 
 exports.whois = whois;
-exports.iam = add;
+exports.addNick = addNick;
