@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
+const whois = require('./commands/whois').whois;
+const iam = require('./commands/whois').add;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -44,6 +46,12 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
+		case 'whois':
+			whois(msg, args);
+		break;
+		case 'iam':
+			iam(msg, args);
+		break;
         default:
             msg.reply("No effing clue what you're talking about, " + author.username + ". What you mean by '" + cmd + "'?")
                 .catch(console.error);
