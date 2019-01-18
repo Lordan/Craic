@@ -1,0 +1,12 @@
+{
+  "name": "craic_greeter",
+  "version": "1.0.0",
+  "description": "Welcome to the craic",
+  "author": "Harald Schlindwein",
+  "dependencies": {
+    "discord.js": "*"
+  },
+  "scripts": {
+    "start": "node craic_me_up.js"
+  }
+}
