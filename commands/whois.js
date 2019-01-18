@@ -8,7 +8,7 @@ function whois(msg, args) {
 		.catch(console.error);
 }
 
-function iam(msg, args) {
+function add(msg, args) {
 	if (msg === null) return;
 	msg.author.createDM()
 		.then((dmChannel) => {
