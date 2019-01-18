@@ -5,7 +5,7 @@ function whois(msg, args) {
 			dmChannel.send(`You called WHOIS with ${args}`)
 				.catch(console.error);
 		})
-		catch(console.error);
+		.catch(console.error);
 }
 
 function iam(msg, args) {
@@ -15,7 +15,7 @@ function iam(msg, args) {
 			dmChannel.send(`You called IAM with ${args}`)
 				.catch(console.error);
 		})
-		catch(console.error);
+		.catch(console.error);
 }
 
 exports.whois = whois;
