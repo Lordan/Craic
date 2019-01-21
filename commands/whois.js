@@ -15,6 +15,7 @@ function whois(msg, args) {
 	}
 	var userArg = args[0];
 	if (userArg.startsWith(usrPrefix)) {
+		console.log(`whois(): started with ${usrPrefix} and guild is ${msg.guild}`);
 		if (msg.guild !== null) {
 			replyMsg = `Please do not use the @ prefix for the user to avoid mentioning them. If you want to use <@user> please do so in a DM. Usage !whois <user>, you called with ${args}`;
 			respond(msg, replyMsg);
