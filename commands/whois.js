@@ -12,7 +12,7 @@ function whois(msg, args) {
 		respond(msg, replyMsg);
 		return;
 	}
-	if (args[0].startsWith(usrPrefix) {
+	if (args[0].startsWith(usrPrefix)) {
 		replyMsg = `Please do not use the @ prefix for the user to avoid mentioning them. Usage !whois <user>, you called with ${args}`;
 		respond(msg, replyMsg);
 		return;
