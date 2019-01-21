@@ -33,7 +33,7 @@ client.on('message', msg => {
 
     args = args.splice(1);
 	var guild = msg.guild === null ? 'Craic' : msg.guild;
-    switch(cmd) {
+    switch(cmd.toLowerCase()) {
         case 'ping':
             msg.reply(`Pong from ${guild}`);
             break;
