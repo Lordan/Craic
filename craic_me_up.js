@@ -35,7 +35,7 @@ client.on('message', msg => {
             msg.reply(`Pong from ${msg.guild}`);
             break;
         case 'joke':
-            msg.reply(`A joke? We don't do jokes here in ${msg.guild}, ${author.username}. Just go and kill some Z's you effing twat!")
+            msg.reply(`A joke? We don't do jokes here in ${msg.guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
                 .catch(console.error);
         break;
         case 'weather':
