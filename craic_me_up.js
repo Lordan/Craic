@@ -32,14 +32,14 @@ client.on('message', msg => {
     args = args.splice(1);
     switch(cmd) {
         case 'ping':
-            msg.reply('Pong!');
+            msg.reply(`Pong from ${msg.guild}`);
             break;
         case 'joke':
-            msg.reply("A joke? Fuck off " + author.username + " and kill some Z's you fucking twat!")
+            msg.reply(`A joke? We don't do jokes here in ${msg.guild}, ${author.username}. Just go and kill some Z's you effing twat!")
                 .catch(console.error);
         break;
         case 'weather':
-            msg.reply("Bloody brilliant indeed, somewhere on this lovely planet at least.")
+            msg.reply(`Bloody brilliant indeed, somewhere on this lovely planet at least.`)
                 .catch(console.error);
         break;
         case 'shutup':
