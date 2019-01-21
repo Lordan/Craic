@@ -7,7 +7,7 @@ function whois(msg, args) {
 	if (msg === null) return;
 	var replyMsg = '';
 	if (args === null || !(args instanceof Array) || args.length == 0 || !args[0].startsWith(usrPrefix)) {
-			replyMsg = 'No user provided for whois. Usage !whois <@user>.';
+			replyMsg = `No user provided for whois. Usage !whois <@user>, you called with ${args}`;
 			respond(msg, replyMsg);
 			return;
 	}
