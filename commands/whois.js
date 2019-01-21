@@ -6,14 +6,20 @@ const usrPrefix = '@';
 function whois(msg, args) {
 	if (msg === null) return;
 	var replyMsg = '';
-	if (args === null || !(args instanceof Array) || args.length == 0 || !args[0].startsWith(usrPrefix)) {
-			replyMsg = `No user provided for whois. Usage !whois <@user>, you called with ${args}`;
-			respond(msg, replyMsg);
-			return;
+	if (args === null || !(args instanceof Array) || args.length == 0) {
+		console.error("whois(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
+		replyMsg = `No user provided for whois. Usage !whois <user>, you called with ${args}`;
+		respond(msg, replyMsg);
+		return;
+	}
+	if (args[0].startsWith(usrPrefix) {
+		replyMsg = `Please do not use the @ prefix for the user to avoid mentioning them. Usage !whois <user>, you called with ${args}`;
+		respond(msg, replyMsg);
+		return;
 	}
 	jsonfile.readFile(nicksFile)
 		.then(nicks => {
-			var usr = args[0].substring(1);
+			var usr = args[0];
 			if (nicks.hasOwnProperty(usr)) {
 				replyMsg = `${usr}'s ingame nick is ${nicks[usr]}`;
 			}
