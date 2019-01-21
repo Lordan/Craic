@@ -30,7 +30,7 @@ client.on('message', msg => {
     var cmd = args[0];
 
     args = args.splice(1);
-	var guild = (msg.channel instanceof DMChannel) ? 'Craic' : msg.guild;
+	var guild = msg.guild === null ? 'Craic' : msg.guild;
     switch(cmd) {
         case 'ping':
             msg.reply(`Pong from ${guild}`);
