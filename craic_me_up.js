@@ -30,12 +30,13 @@ client.on('message', msg => {
     var cmd = args[0];
 
     args = args.splice(1);
+	var guild = (msg.channel instanceof DMChannel) ? 'Craic' : msg.guild;
     switch(cmd) {
         case 'ping':
-            msg.reply(`Pong from ${msg.guild}`);
+            msg.reply(`Pong from ${guild}`);
             break;
         case 'joke':
-            msg.reply(`A joke? We don't do jokes here in ${msg.guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
+            msg.reply(`A joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
                 .catch(console.error);
         break;
         case 'weather':
