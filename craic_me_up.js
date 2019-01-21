@@ -2,8 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
-const whois = require('./commands/whois').whois;
-const addNick = require('./commands/whois').addNick;
+const whoisTools = require('./commands/whois');
+const whois = whoisTools.whois;
+const addNick = whoisTools.addNick;
+const reverseLookup = whoisTools.reverseLookup;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -52,6 +54,9 @@ client.on('message', msg => {
 		break;
 		case 'iam':
 			addNick(msg, args);
+		break;
+		case 'reverseLookup':
+			reverseLookup(msg, args);
 		break;
         default:
             msg.reply("No effing clue what you're talking about, " + author.username + ". What you mean by '" + cmd + "'?")
