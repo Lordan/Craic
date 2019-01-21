@@ -32,7 +32,8 @@ client.on('message', msg => {
     var cmd = args[0];
 
     args = args.splice(1);
-	var guild = msg.guild === null ? 'Craic' : msg.guild;
+	console.log(`Command received, message.guild: ${msg.guild}`);
+	const guild = msg.guild === null ? 'Craic' : msg.guild;
     switch(cmd.toLowerCase()) {
         case 'ping':
             msg.reply(`Pong from ${guild}`);
