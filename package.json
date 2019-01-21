@@ -5,7 +5,7 @@
   "author": "Harald Schlindwein",
   "dependencies": {
     "discord.js": "*",
-    "redis": "^2.8.0",
+    "jsonfile": "^5.0.0",
     "request": "2.81.0"
   },
   "scripts": {
