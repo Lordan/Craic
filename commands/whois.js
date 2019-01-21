@@ -2,7 +2,7 @@ const jsonfile = require('jsonfile')
 const nicksFile = './data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
-const respond = require('./respond.js');
+const respond = require('./responder.js').respond;
 
 function whois(msg, args) {
 	if (msg === null) return;
@@ -50,22 +50,17 @@ function reverseLookup(msg, args) {
 		return;
 	}
 	
-	var usr = args[0];
-	
+	var nick = args[0];
 	jsonfile.readFile(nicksFile)
-		.then(nicks => {
+		.then(users => {
+			replyMsg = `Couldn't find the user for the ingame nick ${nick}`;
 			
-			Object.keys(obj).forEach(function(key,index) {
-    // key: the name of the object key
-    // index: the ordinal position of the key within the object 
-			});
-			
-			if (nicks.hasOwnProperty(usr)) {
-				replyMsg = `${usr}'s ingame nick is ${nicks[usr]}`;
-			}
-			else {
-				replyMsg = `No ingame nick found for ${usr}`;
-			}
+			for (const user in users) {
+				if (users[user]== nick) {
+					replyMsg = `Found ${user} for the ingame nick ${nick}`;
+					break;
+				}
+			}		
 			respond(msg, replyMsg);
 			return;
 		})
