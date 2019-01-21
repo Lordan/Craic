@@ -68,13 +68,24 @@ function reverseLookup(msg, args) {
 }
 
 function addNick(msg, args) {
-	if (msg === null) return;
-	msg.author.createDM()
-		.then((dmChannel) => {
-			dmChannel.send(`You called IAM with ${args}`)
-				.catch(console.error);
+	if (msg === null || msg.author === null) return;
+	var replyMsg = '';
+	if (args === null || !(args instanceof Array) || args.length == 0) {
+		console.error("reverseLookup(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
+		replyMsg = `No ingame nick provided to add to list. Usage !iam <ingame nick>, you called with ${args}`;
+		respond(msg, replyMsg);
+		return;
+	}
+	var nick = args[0];
+	var user = msg.author.username;
+	jsonfile.readFile(nicksFile)
+		.then(users => {
+			users[user] = nick;
+			replyMsg = `Added ${nick} as ingame nick for user ${user}`;
+			respond(msg, replyMsg);
+			return;
 		})
-		.catch(console.error);
+		.catch(console.error)
 }
 
 exports.whois = whois;
