@@ -37,7 +37,7 @@ function whois(msg, args) {
 			respond(msg, replyMsg);
 			return;
 		})
-		.catch(console.error) 	
+		.catch(console.error); 	
 }
 
 function reverseLookup(msg, args) {
@@ -64,7 +64,7 @@ function reverseLookup(msg, args) {
 			respond(msg, replyMsg);
 			return;
 		})
-		.catch(console.error) 	
+		.catch(console.error); 	
 }
 
 function addNick(msg, args) {
@@ -81,11 +81,15 @@ function addNick(msg, args) {
 	jsonfile.readFile(nicksFile)
 		.then(users => {
 			users[user] = nick;
-			replyMsg = `Added ${nick} as ingame nick for user ${user}`;
-			respond(msg, replyMsg);
-			return;
+			jsonfile.writeFile(nicksFile, users,)
+				.then(res => {
+					replyMsg = `Added ${nick} as ingame nick for user ${user}`;
+					respond(msg, replyMsg);
+					return;
+				})
+				.catch(console.error);	
 		})
-		.catch(console.error)
+		.catch(console.error);
 }
 
 exports.whois = whois;
