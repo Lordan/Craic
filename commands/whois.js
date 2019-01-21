@@ -26,7 +26,8 @@ function whois(msg, args) {
 				replyMsg = `${userArg}'s ingame nick is ${nicks[userArg]}`;
 			}
 			else {
-				replyMsg = `No ingame nick found for ${userArg}`;
+				//respond with the original parameter
+				replyMsg = `No ingame nick found for ${args[0]}`;
 			}
 			respond(msg, replyMsg);
 			return;
