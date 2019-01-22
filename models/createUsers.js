@@ -6,8 +6,15 @@ const client = new Client({
 });
 
 client.connect().then(() => {
-	const query = client.query('CREATE TABLE users(id SERIAL PRIMARY KEY, discord_id VARCHAR(20) UNIQUE, user_name VARCHAR(40) not null, ingame_nick VARCHAR(40), guild VARCHAR(40))'); 
-	query.on('end', () => { client.end(); });
+	client.query('CREATE TABLE users(id SERIAL PRIMARY KEY, discord_id VARCHAR(20) UNIQUE, user_name VARCHAR(40) not null, ingame_nick VARCHAR(40), guild VARCHAR(40))')
+	.then(()  => {
+		console.log("Success!");
+		client.end();
+	})
+	.catch(e => {
+		console.error("Failed!");
+		client.end();
+	});
 })
 .catch(console.error);
 
