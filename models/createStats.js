@@ -12,7 +12,7 @@ client.connect().then(() => {
 		client.end();
 	})
 	.catch(e => {
-		console.error("Failed!");
+		console.error("Failed! Error: " + e);
 		client.end();
 	});
 })
