@@ -5,9 +5,12 @@ const client = new Client({
   ssl: true,
 });
 
-await client.connect();
+client.connect().then(() => {
+	const query = client.query(
+  'CREATE TABLE users(id SERIAL PRIMARY KEY, discord_id VARCHAR(20) UNIQUE, user_name VARCHAR(40) not null, ingame_nick VARCHAR(40), guild VARCHAR(40))');
+})
+.catch(console.error);
 
-const query = client.query(
-  'CREATE TABLE users(id SERIAL PRIMARY KEY, discord_id VARCHAR(20) not null, user_name VARCHAR(40) not null, ingame_nick VARCHAR(40), guild VARCHAR940))');
+
   
 query.on('end', () => { client.end(); });
