@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const userQueries = require('./tools/dbQueries.js').userQueries;
+const userQueries = require('./dbQueries.js').userQueries;
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
