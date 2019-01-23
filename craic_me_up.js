@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const util = require('util')
 const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
@@ -39,7 +40,7 @@ client.on('message', msg => {
             msg.reply(`Pong from ${guild}`);
             break;
         case 'joke':
-		console.log("Funny guy: " + JSON.stringify(msg.author));
+		console.log("Funny guy: " + util.inspect(msg.author));
             msg.reply(`A joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
                 .catch(console.error);
         break;
