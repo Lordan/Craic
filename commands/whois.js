@@ -1,9 +1,9 @@
-const dataHandler = require('./tools/dataHandler.js');
+const dataHandler = require('../tools/dataHandler.js');
 const setIngameNick = dataHandler.setIngameNick;
-const nicksFile = './data/nicks.json'
+const nicksFile = '../data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
-const respond = require('./tools/responder.js').respond;
+const respond = require('../tools/responder.js').respond;
 
 function whois(msg, args) {
 	if (msg === null) return;
