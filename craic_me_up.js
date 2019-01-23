@@ -40,7 +40,6 @@ client.on('message', msg => {
             msg.reply(`Pong from ${guild}`);
             break;
         case 'joke':
-		console.log("Funny guy: " + util.inspect(msg.author));
             msg.reply(`A joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
                 .catch(console.error);
         break;
@@ -61,6 +60,11 @@ client.on('message', msg => {
 		case 'reverseLookup':
 			reverseLookup(msg, args);
 		break;
+		case 'debug':
+			msg.react('👍');
+			console.log("Message content: " + util.inspect(msg.author));
+			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
+			break;
         default:
             msg.reply("No effing clue what you're talking about, " + author.username + ". What you mean by '" + cmd + "'?")
                 .catch(console.error);
