@@ -78,7 +78,8 @@ function addNick(msg, args) {
 	const guildName = msg.guild.name || 'Craic';
 	
 	setIngameNick(discordId, username, ingameNick, guildName)
-		.then({
+		.then(res => {
+			console.log(`Ingame nick added, result set: ${util.inspect(res)}`);
 			replyMsg = `Added ${nick} as ingame nick for user ${user}`;
 			respond(msg, replyMsg);
 			return;
