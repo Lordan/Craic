@@ -1,3 +1,4 @@
+const util = require('util')
 const dataHandler = require('../tools/dataHandler.js');
 const setIngameNick = dataHandler.setIngameNick;
 const nicksFile = '../data/nicks.json'
