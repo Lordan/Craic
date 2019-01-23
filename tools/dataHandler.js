@@ -6,7 +6,7 @@ const client = new Client({
   ssl: true,
 });
 
-await client.connect();
+client.connect();
 
 function getIngameNickByUsername(username) {
 	let promise = new Promise((resolve, reject) => {
@@ -51,13 +51,17 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 }
 
 function executeQuery(resolve, reject, query) {
+	
+	client.connect();
 	client.query(query)
 			.then(res => {
 				let resultSet = Object.keys(res).map(val => res[val]);
+				client.end();
 				resolve(resultSet);
 			})
 			.catch(e => {
 				console.error(e.stack);
+				client.end();
 				reject('DB query failed');
 			});
 }
