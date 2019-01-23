@@ -1,4 +1,5 @@
 const { Client } = require('pg');
+const userQueries = require('./tools/dbQueries.js').userQueries;
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -7,12 +8,60 @@ const client = new Client({
 
 await client.connect();
 
-function queryTable
+function getIngameNickByUsername(username) {
+	let promise = new Promise((resolve, reject) => {
+		if (username === null || username.trim().length < 1) reject('No username given');
+		const query = {
+			text : userQueries.getIngameNickByUsername,
+			values: [username]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;	
+}
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
+function getIngameNickByDiscordId(discordId) {
+	let promise = new Promise((resolve, reject) => {
+		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
+		const query = {
+			text : userQueries.getIngameNickByDiscordId,
+			values: [discordId]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;	
+}
+
+function setIngameNick(discordId, username, ingameNick, guild) {
+	let promise = new Promise((resolve, reject) => {
+		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
+		if (username === null || username.trim().length < 1) reject('No username given');
+		if (ingameNick === null || ingameNick.trim().length < 1) reject('No ingame nick given');
+		if (guild === null || guild.trim().length < 1) reject('No guild given');
+		const query = {
+			text : userQueries.setIngameNick,
+			values: [discordId, username, ingameNick, guild]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
+function executeQuery(resolve, reject, query) {
+	client.query(query)
+			.then(res => {
+				let resultSet = Object.keys(res).map(val => res[val]);
+				resolve(resultSet);
+			})
+			.catch(e => {
+				console.error(e.stack);
+				reject('DB query failed');
+			});
+}
+
+exports.getIngameNickByUsername = getIngameNickByUsername;
+exports.getIngameNickByDiscordId = getIngameNickByDiscordId;
+exports.setIngameNick = setIngameNick;

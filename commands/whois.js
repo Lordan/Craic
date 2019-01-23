@@ -1,4 +1,5 @@
-const jsonfile = require('jsonfile')
+const dataHandler = require('./tools/dataHandler.js');
+const setIngameNick = dataHandler.setIngameNick;
 const nicksFile = './data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
@@ -64,25 +65,23 @@ function reverseLookup(msg, args) {
 
 function addNick(msg, args) {
 	if (msg === null || msg.author === null) return;
-	var replyMsg = '';
+	let replyMsg = '';
 	if (args === null || !(args instanceof Array) || args.length == 0) {
-		console.error("reverseLookup(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
+		console.error("addNick(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
 		replyMsg = `No ingame nick provided to add to list. Usage !iam <ingame nick>, you called with ${args}`;
 		respond(msg, replyMsg);
 		return;
 	}
-	var nick = args[0];
-	var user = msg.author.username;
-	jsonfile.readFile(nicksFile)
-		.then(users => {
-			users[user] = nick;
-			jsonfile.writeFile(nicksFile, users,)
-				.then(res => {
-					replyMsg = `Added ${nick} as ingame nick for user ${user}`;
-					respond(msg, replyMsg);
-					return;
-				})
-				.catch(console.error);	
+	let ingameNick = args[0];
+	const username = msg.author.username;
+	const discordId = msg.author.id;
+	const guildName = msg.guild.name || 'Craic';
+	
+	setIngameNick(discordId, username, ingameNick, guildName)
+		.then({
+			replyMsg = `Added ${nick} as ingame nick for user ${user}`;
+			respond(msg, replyMsg);
+			return;
 		})
 		.catch(console.error);
 }
