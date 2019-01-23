@@ -62,7 +62,8 @@ client.on('message', msg => {
 		break;
 		case 'debug':
 			msg.react('👍');
-			console.log("Message content: " + util.inspect(msg.author));
+			console.log("Message details: " + util.inspect(msg));			
+			console.log("Message.author: " + util.inspect(msg.author));
 			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
 			break;
         default:
