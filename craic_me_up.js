@@ -29,7 +29,7 @@ client.on('message', msg => {
   var author = msg.author;
   
     if (!content.startsWith(prefix) || author.bot) return;
-	if (isGuildMember(msg)) {
+	if (!isGuildMember(msg)) {
 		msg.reply("This bot is only for guild members!");
 		return;
 	}
@@ -77,7 +77,8 @@ client.on('message', msg => {
 			msg.react('👍');
 			console.log("Message details: " + util.inspect(msg));			
 			console.log("Message.author: " + util.inspect(author));
-			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
+			console.log("Mentions.users: " + util.inspect(msg.mentions.users));			
+			console.log(`All guilds: ${util.inspect(client.guilds)}`);	
 			break;
         default:
             msg.reply(`No effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?`)
@@ -87,7 +88,13 @@ client.on('message', msg => {
 
 function isGuildMember(msg) {
 	if (msg.member && (msg.member.guild.name == thisGuild)) return true;
-	console.log(`All guilds: ${util.inspect(client.guilds)}`);
+	for (var [guildId, guild] of client.guilds) {
+		const member = guild.member(msg.author);
+		if (member) {
+			console.log(`User ${msg.author.username} is member of ${guild.name}`);
+			return true;
+		}
+	}
 	return false;
 }
 
