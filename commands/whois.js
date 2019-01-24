@@ -46,10 +46,10 @@ function whois(msg, args) {
 		});
 	} else {
 		
+		//try to get an username out of the search param
+		const parsedParam = parseSearchParam(searchParam);
 		console.log(`whois() - calling getIngameNickByUsername`);
-		getIngameNickByUsername(searchParam).then(res => {
-			//try to get an username out of the search param
-			const parsedParam = parseSearchParam(searchParam);
+		getIngameNickByUsername(parsedParam).then(res => {
 			//we might have a whois with ingame nick as search parameter
 			let finalResult = res;
 			if (res.rowCount == 0) {				
@@ -71,19 +71,16 @@ function whois(msg, args) {
 }
 
 function parseSearchParam(param) {
-	console.log(`param: ${param} -|- split at ${usrPrefix}: ${param.split(usrPrefix)[1]} -|- split at ${usrPostfix}: ${param.split(usrPrefix)[1].split(usrPostfix)[0]}`);
 	if (!param.includes(usrPrefix) || !param.includes(usrPostfix)) return param;
 	return param.split(usrPrefix)[1].split(usrPostfix)[0];
 }
 
 function parseWhoisResult(res, searchParam) {
-	console.log(`parseWhoisResult() - received ${util.inspect(res)} and search param ${searchParam}`);
 	//respond with the original parameter
 	let replyMsg = `Nothing found for ${searchParam}`;
 	if (res.rowCount > 0) {
 		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
 	}
-	console.log(`parseWhoisResult() - returning ${replyMsg}`);
 	return replyMsg;		
 }
 
