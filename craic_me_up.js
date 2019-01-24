@@ -21,7 +21,7 @@ client.on('guildMemberAdd', member => {
     // channel wasn't found on this server
     if (!channel) return;
 
-    channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.`);
+    channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTAN: please add your ingame nick by using !iam <ingame nick>, thx!`);
 });
 
 client.on('message', msg => {
@@ -65,11 +65,16 @@ client.on('message', msg => {
 		case 'reverseLookup':
 			msg.reply(`This command was removed, please use '!whois <ingame nick>' instead`)
                 .catch(console.error);
-		break;		
+		break;	
+		case 'stats':
+			msg.reply(`Coming soon...`)
+                .catch(console.error);
+		break;	
 		case 'help':
 			msg.reply(`Thanks for asking!\n\n
 			'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
 			'!iam': sets a given ingame nick for your user\n
+			'!stats': !NOT IMPLEMENTED YET! shows the most recent stats
 			...more to come`)
                 .catch(console.error);
 		break;
