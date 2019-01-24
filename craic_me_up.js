@@ -29,7 +29,7 @@ client.on('message', msg => {
   var author = msg.author;
   
     if (!content.startsWith(prefix) || author.bot) return;
-	if (!guild.members.get(author.id)) {
+	if (isGuildMember(msg)) {
 		msg.reply("This bot is only for guild members!");
 		return;
 	}
@@ -84,6 +84,12 @@ client.on('message', msg => {
                 .catch(console.error);
         }
 });
+
+function isGuildMember(msg) {
+	if (msg.member && (msg.member.guild.name == thisGuild) return true;
+	console.log(`All guilds: ${util.inspect(client.guilds)}`);
+	return false;
+}
 
 console.log('Diving in now...');
 client.login(authToken);
