@@ -86,7 +86,7 @@ client.on('message', msg => {
 });
 
 function isGuildMember(msg) {
-	if (msg.member && (msg.member.guild.name == thisGuild) return true;
+	if (msg.member && (msg.member.guild.name == thisGuild)) return true;
 	console.log(`All guilds: ${util.inspect(client.guilds)}`);
 	return false;
 }
