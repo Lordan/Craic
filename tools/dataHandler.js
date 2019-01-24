@@ -1,10 +1,5 @@
-const { Client } = require('pg');
+const db = require('../db')
 const userQueries = require('./dbQueries.js').userQueries;
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
 
 function getIngameNickByUsername(username) {	
 	console.log(`getIngameNickByUsername() - received ${username}`);
@@ -66,15 +61,12 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 }
 
 function executeQuery(resolve, reject, query) {	
-	client.connect().catch(console.error);
-	client.query(query)
+	db.query(query)
 			.then(res => {
-				client.end();
 				resolve(res);
 			})
 			.catch(e => {
 				console.error(e.stack);
-				client.end().catch(console.error);
 				reject('DB query failed');
 			});
 }
