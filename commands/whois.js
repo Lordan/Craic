@@ -57,15 +57,20 @@ function whois(msg, args) {
 				getUsernameByIngameNick(parsedParam).then(res => {
 					finalResult = res;
 					replyMsg = parseWhoisResult(finalResult, searchParam);
+					respond(msg, replyMsg);
+					return;
 				})
 				.catch(console.error);
+			} else {
+				replyMsg = parseWhoisResult(finalResult, searchParam);	
+				respond(msg, replyMsg);
+				return;
 			}
-			replyMsg = parseWhoisResult(finalResult, searchParam);	
-			respond(msg, replyMsg);
 		})
 		.catch(e => {
 			console.error(e);
 			replyMsg = `Failed to retrieve ingame nick, error logged`;
+			respond(msg, replyMsg);
 		});
 	}	 	
 }
