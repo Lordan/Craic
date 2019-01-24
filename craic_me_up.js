@@ -81,7 +81,7 @@ client.on('message', msg => {
 			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
 			break;
         default:
-            msg.reply(`No effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?")
+            msg.reply(`No effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?`)
                 .catch(console.error);
         }
 });
