@@ -22,7 +22,7 @@ function whois(msg, args) {
 	
 	console.log(`whois() - received ${args}`);
 	
-	const searchParam = args[0];
+	let searchParam = args[0];
 	
 	if (searchParam == "help" || searchParam == "?") {
 		replyMsg = `Usage:\n
