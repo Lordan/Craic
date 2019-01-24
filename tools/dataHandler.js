@@ -6,7 +6,8 @@ const client = new Client({
   ssl: true,
 });
 
-function getIngameNickByUsername(username) {
+function getIngameNickByUsername(username) {	
+	console.log(`getIngameNickByUsername() - received ${username}`);
 	let promise = new Promise((resolve, reject) => {
 		if (username === null || username.trim().length < 1) reject('No username given');
 		const query = {
@@ -20,6 +21,7 @@ function getIngameNickByUsername(username) {
 }
 
 function getIngameNickByDiscordId(discordId) {
+	console.log(`getIngameNickByDiscordId() - received ${discordId}`);
 	let promise = new Promise((resolve, reject) => {
 		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
 		const query = {
@@ -33,6 +35,7 @@ function getIngameNickByDiscordId(discordId) {
 }
 
 function getUsernameByIngameNick(ingameNick) {
+	console.log(`getUsernameByIngameNick() - received ${ingameNick}`);
 	let promise = new Promise((resolve, reject) => {
 		if (ingameNick === null || ingameNick.trim().length < 1) reject('No ingame nick given');
 		const query = {
@@ -46,6 +49,7 @@ function getUsernameByIngameNick(ingameNick) {
 }
 
 function setIngameNick(discordId, username, ingameNick, guild) {
+	console.log(`setIngameNick() - received [${discordId}, ${username}, ${ingameNick}, ${guild}] `);
 	let promise = new Promise((resolve, reject) => {
 		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
 		if (username === null || username.trim().length < 1) reject('No username given');
@@ -61,8 +65,8 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 	return promise;
 }
 
-function executeQuery(resolve, reject, query) {
-	
+function executeQuery(resolve, reject, query) {	
+	console.log(`executeQuery() - received ${query}`);
 	client.connect().catch(console.error);
 	client.query(query)
 			.then(res => {

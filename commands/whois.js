@@ -20,6 +20,8 @@ function whois(msg, args) {
 		return;
 	}
 	
+	console.log(`whois() - received ${args}`);
+	
 	const searchParam = args[0];
 	
 	if (searchParam == "help" || searchParam == "?") {
@@ -32,7 +34,8 @@ function whois(msg, args) {
 	}
 	
 	if (msg.mentions && msg.mentions.users) {
-		const discordId = msg.mentions.users.firstKey();
+		const discordId = msg.mentions.users.firstKey();		
+		console.log(`whois() - calling getIngameNickByDiscordId`);
 		getIngameNickByDiscordId(discordId).then(res => {
 			replyMsg = parseWhoisResult(res, searchParam);
 		})
@@ -41,10 +44,13 @@ function whois(msg, args) {
 			replyMsg = `Failed to retrieve ingame nick, error logged`;
 		});
 	} else {
+		
+		console.log(`whois() - calling getIngameNickByUsername`);
 		getIngameNickByUsername(searchParam).then(res => {
 			//we might have a whois with ingame nick as search parameter
 			let finalResult = res;
-			if (res.rowCount == 0) {
+			if (res.rowCount == 0) {				
+				console.log(`whois() - calling getUsernameByIngameNick`);
 				getUsernameByIngameNick(searchParam).then(res => {
 					finalResult = res;
 				})
@@ -63,8 +69,9 @@ function whois(msg, args) {
 }
 
 function parseWhoisResult(res, searchParam) {
+	console.log(`parseWhoisResult() - received ${util.inspect(query)} and search param ${searchParam}`);
 	//respond with the original parameter
-	replyMsg = `Nothing found for ${searchParam}`;
+	let replyMsg = `Nothing found for ${searchParam}`;
 	if (res.rowCount > 0) {
 		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingameNick}`;
 	}
@@ -80,8 +87,8 @@ function addNick(msg, args) {
 		respond(msg, replyMsg);
 		return;
 	}
-	let ingameNick = args[0];
-	
+	let ingameNick = args[0];	
+	console.log(`addNick() - received ${ingameNick}`);
 	if (ingameNick == "help" || ingameNick == "?") {
 		replyMsg = `Usage:\n
 			!iam <ingame nick>`;
