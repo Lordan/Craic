@@ -74,7 +74,7 @@ function parseWhoisResult(res, searchParam) {
 	//respond with the original parameter
 	let replyMsg = `Nothing found for ${searchParam}`;
 	if (res.rowCount > 0) {
-		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingameNick}`;
+		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
 	}
 	console.log(`parseWhoisResult() - returning ${replyMsg}`);
 	return replyMsg;		
