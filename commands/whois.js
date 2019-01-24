@@ -69,7 +69,7 @@ function whois(msg, args) {
 }
 
 function parseWhoisResult(res, searchParam) {
-	console.log(`parseWhoisResult() - received ${util.inspect(query)} and search param ${searchParam}`);
+	console.log(`parseWhoisResult() - received ${util.inspect(res)} and search param ${searchParam}`);
 	//respond with the original parameter
 	let replyMsg = `Nothing found for ${searchParam}`;
 	if (res.rowCount > 0) {
