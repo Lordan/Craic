@@ -64,6 +64,7 @@ function whois(msg, args) {
 		});
 	}
 	
+	console.log(`whois() - calling responder with ${replyMsg}`);
 	respond(msg, replyMsg);
 	return;		 	
 }
@@ -75,6 +76,7 @@ function parseWhoisResult(res, searchParam) {
 	if (res.rowCount > 0) {
 		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingameNick}`;
 	}
+	console.log(`parseWhoisResult() - returning ${replyMsg}`;
 	return replyMsg;		
 }
 
