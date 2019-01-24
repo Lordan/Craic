@@ -54,8 +54,7 @@ function whois(msg, args) {
 				console.log(`whois() - calling getUsernameByIngameNick`);
 				getUsernameByIngameNick(searchParam).then(res => {
 					finalResult = res;
-					replyMsg = parseWhoisResult(finalResult, searchParam);	
-					respond(msg, replyMsg)
+					replyMsg = parseWhoisResult(finalResult, searchParam);
 				})
 				.catch(console.error);
 			}
