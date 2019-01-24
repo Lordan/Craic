@@ -9,7 +9,7 @@ const usrPrefix = '@';
 const usrPostfix = '#';
 const respond = require('../tools/responder.js').respond;
 
-function whois(msg, args) {
+async function whois(msg, args) {
 	if (msg === null) return;
 	let replyMsg = '';
 	
@@ -37,47 +37,29 @@ function whois(msg, args) {
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
-		getIngameNickByDiscordId(discordId).then(res => {
-			if (res.rowCount > 0) {
+		let result = awaitgetIngameNickByDiscordId(discordId);
+		if (result.rowCount > 0) {
 				replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
-			}	
-			respond(msg, replyMsg);
-		})
-		.catch(e => {
-			console.error(e);
-			replyMsg = `Failed to retrieve ingame nick, error logged`;
-		});
+		}
 	} else {
 		
 		//try to get an username out of the search param
 		const parsedParam = parseSearchParam(searchParam);
 		console.log(`whois() - calling getIngameNickByUsername`);
-		getIngameNickByUsername(parsedParam).then(res => {
+		let result = await getIngameNickByUsername(parsedParam);
+
+		if (res.rowCount > 0) {				
+			replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
+		} else {
 			//we might have a whois with ingame nick as search parameter
-				if (res.rowCount > 0) {				
-					replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
-					respond(msg, replyMsg);
-					return;
-				}
-				console.log(`whois() - calling getUsernameByIngameNick`);
-				getUsernameByIngameNick(parsedParam).then(innerRes => {
-					if (res.rowCount > 0) {				
-						replyMsg = `${searchParam}'s username is ${res.rows[0].user_name}`;
-						respond(msg, replyMsg);
-						return;
-					}
-					respond(msg, replyMsg);
-					return;
-				})
-				.catch(console.error);
-			} 
-		})
-		.catch(e => {
-			console.error(e);
-			replyMsg = `Failed to retrieve ingame nick, error logged`;
-			respond(msg, replyMsg);
-		});
-	}	 	
+			console.log(`whois() - calling getUsernameByIngameNick`);
+			result = await getUsernameByIngameNick(parsedParam);
+			if (res.rowCount > 0) {				
+				replyMsg = `${searchParam}'s username is ${res.rows[0].user_name}`;
+			}
+		}
+	}	 
+	respond(msg, replyMsg)
 }
 
 function parseSearchParam(param) {

@@ -57,7 +57,7 @@ client.on('message', msg => {
                 .catch(console.error);
         break;
 		case 'whois':
-			whois(msg, args);
+			whois(msg, args).catch(console.error);
 		break;
 		case 'iam':
 			addNick(msg, args);
