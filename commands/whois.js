@@ -33,8 +33,6 @@ function whois(msg, args) {
 			return;
 	}
 	
-	console.log(`Mentions: ${util.inspect(msg.mentions)}\nlength ${msg.mentions.users.size}`);
-	
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
@@ -50,6 +48,8 @@ function whois(msg, args) {
 		
 		console.log(`whois() - calling getIngameNickByUsername`);
 		getIngameNickByUsername(searchParam).then(res => {
+			//try to get an username out of the search param
+			searchParam = parseSearchParam(searchParam);
 			//we might have a whois with ingame nick as search parameter
 			let finalResult = res;
 			if (res.rowCount == 0) {				
@@ -68,6 +68,11 @@ function whois(msg, args) {
 			replyMsg = `Failed to retrieve ingame nick, error logged`;
 		});
 	}	 	
+}
+
+function parseSearchParam(param) {
+	if (!param.includes(usrPrefix) || !param.includes(usrPostfix)) return param;
+	return param.split(usrPrefix)[1].split(usrPostfix)[0];
 }
 
 function parseWhoisResult(res, searchParam) {
