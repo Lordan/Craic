@@ -32,6 +32,19 @@ function getIngameNickByDiscordId(discordId) {
 	return promise;	
 }
 
+function getUsernameByIngameNick(ingameNick) {
+	let promise = new Promise((resolve, reject) => {
+		if (ingameNick === null || ingameNick.trim().length < 1) reject('No ingame nick given');
+		const query = {
+			text : userQueries.getUsernameByIngameNick,
+			values: [ingameNick]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;	
+}
+
 function setIngameNick(discordId, username, ingameNick, guild) {
 	let promise = new Promise((resolve, reject) => {
 		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
@@ -66,4 +79,5 @@ function executeQuery(resolve, reject, query) {
 
 exports.getIngameNickByUsername = getIngameNickByUsername;
 exports.getIngameNickByDiscordId = getIngameNickByDiscordId;
+exports.getUsernameByIngameNick = getUsernameByIngameNick;
 exports.setIngameNick = setIngameNick;

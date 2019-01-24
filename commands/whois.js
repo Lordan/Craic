@@ -1,6 +1,9 @@
 const util = require('util')
 const dataHandler = require('../tools/dataHandler.js');
 const setIngameNick = dataHandler.setIngameNick;
+const getIngameNickByDiscordId = dataHandler.getIngameNickByDiscordId;
+const getIngameNickByUsername = dataHandler.getIngameNickByUsername;
+const getUsernameByIngameNick = dataHandler.getUsernameByIngameNick;
 const nicksFile = '../data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
@@ -8,33 +11,55 @@ const respond = require('../tools/responder.js').respond;
 
 function whois(msg, args) {
 	if (msg === null) return;
-	var replyMsg = '';
+	let replyMsg = '';
+	
 	if (args === null || !(args instanceof Array) || args.length == 0) {
 		console.error("whois(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
 		replyMsg = `No user provided for whois. Usage !whois <user>, you called with ${args}`;
 		respond(msg, replyMsg);
 		return;
 	}
-	var userArg = args[0];
-	if (userArg.startsWith(usrPrefix)) {
-		userArg = userArg.substring(
-			userArg.lastIndexOf(usrPrefix) + 1, 
-			userArg.lastIndexOf(usrPostfix)
-		);	
-	}
-	jsonfile.readFile(nicksFile)
-		.then(nicks => {
-			if (nicks.hasOwnProperty(userArg)) {
-				replyMsg = `${userArg}'s ingame nick is ${nicks[userArg]}`;
-			}
-			else {
-				//respond with the original parameter
-				replyMsg = `No ingame nick found for ${args[0]}`;
-			}
-			respond(msg, replyMsg);
-			return;
+	
+	const searchParam = args[0];
+	
+	if (msg.mentions && msg.mentions.users) {
+		const discordId = msg.mentions.users.firstKey();
+		getIngameNickByDiscordId(discordId).then(res => {
+			replyMsg = parseWhoisResult(res);
 		})
-		.catch(console.error); 	
+		.catch(e => {
+			console.error(e);
+			replyMsg = `Failed to retrieve ingame nick, error logged`;
+		});
+	} else {
+		getIngameNickByUsername(searchParam).then(res => {
+			//we might have a whois with ingame nick as search parameter
+			let finalResult = res;
+			if (res.rowCount == 0) {
+				getUsernameByIngameNick(searchParam).then(res => {
+					finalResult = res;
+				})
+				.catch(console.error);
+			}
+			replyMsg = parseWhoisResult(finalResult);
+		})
+		.catch(e => {
+			console.error(e);
+			replyMsg = `Failed to retrieve ingame nick, error logged`;
+		});
+	}
+	
+	respond(msg, replyMsg);
+	return;		 	
+}
+
+function parseWhoisResult(res) {
+	//respond with the original parameter
+	replyMsg = `Nothing found for ${args[0]}`;
+	if (res.rowCount > 0) {
+		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingameNick}`;
+	}
+	return replyMsg;		
 }
 
 function reverseLookup(msg, args) {

@@ -7,6 +7,7 @@ const whoisTools = require('./commands/whois');
 const whois = whoisTools.whois;
 const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
+const thisGuild = "Craic";
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -28,13 +29,17 @@ client.on('message', msg => {
   var author = msg.author;
   
     if (!content.startsWith(prefix) || author.bot) return;
+	if (!msg.member || msg.member.guild.name != thisGuild) {
+		msg.reply("This bot is only for guild members!");
+		return;
+	}
     
     var args = content.substring(1).split(' ');
     var cmd = args[0];
 
     args = args.splice(1);
 	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${JSON.stringify(args)}`);
-	const guild = msg.guild === null ? 'Craic' : msg.guild;
+	const guild = msg.guild === null ? thisGuild : msg.guild;
     switch(cmd.toLowerCase()) {
         case 'ping':
             msg.reply(`Pong from ${guild}`);
