@@ -22,7 +22,7 @@ function whois(msg, args) {
 	
 	console.log(`whois() - received ${args}`);
 	
-	let searchParam = args[0];
+	const searchParam = args[0];
 	
 	if (searchParam == "help" || searchParam == "?") {
 		replyMsg = `Usage:\n
@@ -49,12 +49,12 @@ function whois(msg, args) {
 		console.log(`whois() - calling getIngameNickByUsername`);
 		getIngameNickByUsername(searchParam).then(res => {
 			//try to get an username out of the search param
-			searchParam = parseSearchParam(searchParam);
+			const parsedParam = parseSearchParam(searchParam);
 			//we might have a whois with ingame nick as search parameter
 			let finalResult = res;
 			if (res.rowCount == 0) {				
 				console.log(`whois() - calling getUsernameByIngameNick`);
-				getUsernameByIngameNick(searchParam).then(res => {
+				getUsernameByIngameNick(parsedParam).then(res => {
 					finalResult = res;
 					replyMsg = parseWhoisResult(finalResult, searchParam);
 				})
@@ -71,6 +71,7 @@ function whois(msg, args) {
 }
 
 function parseSearchParam(param) {
+	console.log(`param: ${param} -|- split at ${usrPrefix}: ${param.split(usrPrefix)[1]} -|- split at ${usrPostfix}: ${param.split(usrPrefix)[1].split(usrPostfix)[0]}`);
 	if (!param.includes(usrPrefix) || !param.includes(usrPostfix)) return param;
 	return param.split(usrPrefix)[1].split(usrPostfix)[0];
 }
