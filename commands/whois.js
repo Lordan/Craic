@@ -34,7 +34,7 @@ function whois(msg, args) {
 	if (msg.mentions && msg.mentions.users) {
 		const discordId = msg.mentions.users.firstKey();
 		getIngameNickByDiscordId(discordId).then(res => {
-			replyMsg = parseWhoisResult(res);
+			replyMsg = parseWhoisResult(res, searchParam);
 		})
 		.catch(e => {
 			console.error(e);
@@ -50,7 +50,7 @@ function whois(msg, args) {
 				})
 				.catch(console.error);
 			}
-			replyMsg = parseWhoisResult(finalResult);
+			replyMsg = parseWhoisResult(finalResult, searchParam);
 		})
 		.catch(e => {
 			console.error(e);
@@ -62,9 +62,9 @@ function whois(msg, args) {
 	return;		 	
 }
 
-function parseWhoisResult(res) {
+function parseWhoisResult(res, searchParam) {
 	//respond with the original parameter
-	replyMsg = `Nothing found for ${args[0]}`;
+	replyMsg = `Nothing found for ${searchParam}`;
 	if (res.rowCount > 0) {
 		replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingameNick}`;
 	}
