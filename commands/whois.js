@@ -37,7 +37,7 @@ async function whois(msg, args) {
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
-		let result = awaitgetIngameNickByDiscordId(discordId);
+		let result = await getIngameNickByDiscordId(discordId);
 		if (result.rowCount > 0) {
 				replyMsg = `${searchParam}'s ingame nick is ${result.rows[0].ingame_nick}`;
 		}
