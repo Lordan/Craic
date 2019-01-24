@@ -39,7 +39,7 @@ async function whois(msg, args) {
 		console.log(`whois() - calling getIngameNickByDiscordId`);
 		let result = awaitgetIngameNickByDiscordId(discordId);
 		if (result.rowCount > 0) {
-				replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
+				replyMsg = `${searchParam}'s ingame nick is ${result.rows[0].ingame_nick}`;
 		}
 	} else {
 		
@@ -47,15 +47,14 @@ async function whois(msg, args) {
 		const parsedParam = parseSearchParam(searchParam);
 		console.log(`whois() - calling getIngameNickByUsername`);
 		let result = await getIngameNickByUsername(parsedParam);
-
-		if (res.rowCount > 0) {				
-			replyMsg = `${searchParam}'s ingame nick is ${res.rows[0].ingame_nick}`;
+		if (result.rowCount > 0) {				
+			replyMsg = `${searchParam}'s ingame nick is ${result.rows[0].ingame_nick}`;
 		} else {
 			//we might have a whois with ingame nick as search parameter
 			console.log(`whois() - calling getUsernameByIngameNick`);
 			result = await getUsernameByIngameNick(parsedParam);
-			if (res.rowCount > 0) {				
-				replyMsg = `${searchParam}'s username is ${res.rows[0].user_name}`;
+			if (result.rowCount > 0) {				
+				replyMsg = `${searchParam}'s username is ${result.rows[0].user_name}`;
 			}
 		}
 	}	 
