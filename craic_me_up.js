@@ -21,7 +21,7 @@ client.on('guildMemberAdd', member => {
     // channel wasn't found on this server
     if (!channel) return;
 
-    channel.send(`Welcome to the craic!, ${member}`);
+    channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.`);
 });
 
 client.on('message', msg => {
