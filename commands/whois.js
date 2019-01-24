@@ -37,7 +37,8 @@ function whois(msg, args) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
 		getIngameNickByDiscordId(discordId).then(res => {
-			replyMsg = parseWhoisResult(res, searchParam);
+			replyMsg = parseWhoisResult(res, searchParam);	
+			respond(msg, replyMsg);
 		})
 		.catch(e => {
 			console.error(e);
@@ -53,20 +54,19 @@ function whois(msg, args) {
 				console.log(`whois() - calling getUsernameByIngameNick`);
 				getUsernameByIngameNick(searchParam).then(res => {
 					finalResult = res;
+					replyMsg = parseWhoisResult(finalResult, searchParam);	
+					respond(msg, replyMsg)
 				})
 				.catch(console.error);
 			}
-			replyMsg = parseWhoisResult(finalResult, searchParam);
+			replyMsg = parseWhoisResult(finalResult, searchParam);	
+			respond(msg, replyMsg);
 		})
 		.catch(e => {
 			console.error(e);
 			replyMsg = `Failed to retrieve ingame nick, error logged`;
 		});
-	}
-	
-	console.log(`whois() - calling responder with ${replyMsg}`);
-	respond(msg, replyMsg);
-	return;		 	
+	}	 	
 }
 
 function parseWhoisResult(res, searchParam) {
@@ -104,6 +104,9 @@ function addNick(msg, args) {
 	
 	setIngameNick(discordId, username, ingameNick, guildName)
 		.then(res => {
+			if (res.rowCount == 0) {
+				replyMsg = `No ingame nick added`;
+			}
 			console.log(`Ingame nick added, result set: ${util.inspect(res)}`);
 			replyMsg = `Added ${ingameNick} as ingame nick for user ${username}`;
 			respond(msg, replyMsg);

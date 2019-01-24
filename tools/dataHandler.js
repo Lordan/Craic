@@ -66,13 +66,11 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 }
 
 function executeQuery(resolve, reject, query) {	
-	console.log(`executeQuery() - received ${query}`);
 	client.connect().catch(console.error);
 	client.query(query)
 			.then(res => {
-				let resultSet = Object.keys(res).map(val => res[val]);
 				client.end();
-				resolve(resultSet);
+				resolve(res);
 			})
 			.catch(e => {
 				console.error(e.stack);
