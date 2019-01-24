@@ -33,7 +33,7 @@ function whois(msg, args) {
 			return;
 	}
 	
-	if (msg.mentions && msg.mentions.users) {
+	if (msg.mentions && msg.mentions.users && msg.mentions.users.length < 1) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
 		getIngameNickByDiscordId(discordId).then(res => {

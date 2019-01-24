@@ -29,7 +29,7 @@ client.on('message', msg => {
   var author = msg.author;
   
     if (!content.startsWith(prefix) || author.bot) return;
-	if (!msg.member || msg.member.guild.name != thisGuild) {
+	if (!guild.members.get(author.id)) {
 		msg.reply("This bot is only for guild members!");
 		return;
 	}
@@ -65,8 +65,7 @@ client.on('message', msg => {
 		case 'reverseLookup':
 			msg.reply(`This command was removed, please use '!whois <ingame nick>' instead`)
                 .catch(console.error);
-		break;
-		
+		break;		
 		case 'help':
 			msg.reply(`Thanks for asking!\n\n
 			'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
@@ -77,7 +76,7 @@ client.on('message', msg => {
 		case 'debug':
 			msg.react('👍');
 			console.log("Message details: " + util.inspect(msg));			
-			console.log("Message.author: " + util.inspect(msg.author));
+			console.log("Message.author: " + util.inspect(author));
 			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
 			break;
         default:
