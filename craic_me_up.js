@@ -63,7 +63,16 @@ client.on('message', msg => {
 			addNick(msg, args);
 		break;
 		case 'reverseLookup':
-			reverseLookup(msg, args);
+			msg.reply(`This command was removed, please use '!whois <ingame nick>' instead`)
+                .catch(console.error);
+		break;
+		
+		case 'help':
+			msg.reply(`Thanks for asking!\n\n
+			'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
+			'!iam': sets a given ingame nick for your user\n
+			...more to come`)
+                .catch(console.error);
 		break;
 		case 'debug':
 			msg.react('👍');
@@ -72,7 +81,7 @@ client.on('message', msg => {
 			console.log("Mentions.users: " + util.inspect(msg.mentions.users));
 			break;
         default:
-            msg.reply("No effing clue what you're talking about, " + author.username + ". What you mean by '" + cmd + "'?")
+            msg.reply(`No effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?")
                 .catch(console.error);
         }
 });
