@@ -100,7 +100,7 @@ function addNick(msg, args) {
 	
 	const username = msg.author.username;
 	const discordId = msg.author.id;
-	const guildName = msg.guild.name || 'Craic';
+	const guildName = msg.guild ? msg.guild.name : 'Craic';
 	
 	setIngameNick(discordId, username, ingameNick, guildName)
 		.then(res => {
