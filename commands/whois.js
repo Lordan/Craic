@@ -33,9 +33,9 @@ function whois(msg, args) {
 			return;
 	}
 	
-	console.log(`Mentions: ${util.inspect(msg.mentions)}\nlength ${msg.mentions.users.length}`);
+	console.log(`Mentions: ${util.inspect(msg.mentions)}\nlength ${msg.mentions.users.size}`);
 	
-	if (msg.mentions && msg.mentions.users && msg.mentions.users.length > 0) {
+	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
 		const discordId = msg.mentions.users.firstKey();		
 		console.log(`whois() - calling getIngameNickByDiscordId`);
 		getIngameNickByDiscordId(discordId).then(res => {
