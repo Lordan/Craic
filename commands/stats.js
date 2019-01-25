@@ -1,8 +1,10 @@
 const util = require('util')
 const dataHandler = require('../tools/dataHandler.js');
+const getUserIdByDiscordId = dataHandler.getUserIdByDiscordId;
 const msgRespond = require('../tools/responder.js').respond;
+const helpMsg = require('../tools/helper.js').statsHelp;
 
-function respond(msg, args) {
+async function respond(msg, args) {
 	if (msg === null) return;
 	let replyMsg = '';
 	
@@ -18,16 +20,38 @@ function respond(msg, args) {
 	const subCmd = args[0];
 	const subArgs = args.splice(1);
 	
-	if (subCmd == "help" || subCmd == "?") {
-		replyMsg = `Usage:\n
-!stats\n
-\tshows the stats of the latest term\n
-!stats add <kills> <missions played> <survivors>\n
-\tadd the given numbers for the current term and your user.\n 
-\te.g. !stats add 123456 23456 3456 for 123456 kills, 23456 missions played and 3456 survivors rescued`;
-			respond(msg, replyMsg);
-			return;
+	switch(subCmd.toLowerCase()) {
+        case 'help':
+		case '?':
+            msgRespond(msg, helpMsg);
+            break;
+        case 'add':
+            await addMimimumStats(msg.author.id, subArgs);
+        break;
+		default:
+            msgRespond(msg, `Unknown option\n${helpMsg}`);
+	}			
+}
+
+async function addMimimumStats(discordId, args) {
+	
+	if (args.length < 3) {
+		console.error(`addMimimumStats() - insufficient number of arguments, needed 3 got ${args.length}`);
+		return Promise.reject(new Error('Insufficient number of arguments'));
 	}
+
+	let result = await getUserIdByDiscordId(discordId);
+		
+	const kills = args[0]; 
+	const missions = args[1];
+	const survivors = args[2];
+	
+	if (result.rowCount == 0) {
+			console.error(`addMimimumStats() - user not found, ${util.inspect(result)}`);
+			return Promise.reject(new Error('User not found'));
+	}
+	const user_id = userId = result.rows[0].id;	
+	console.log(`Would insert user_id ${user_id} and kills ${kills}, missions ${missions} and survivors ${survivors}`); 
 }
 
 exports.respond = respond;
