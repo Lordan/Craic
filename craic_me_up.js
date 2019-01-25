@@ -27,8 +27,8 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', msg => {
-  var content = msg.content;
-  var author = msg.author;
+  const content = msg.content;
+  const author = msg.author;
   
     if (!content.startsWith(prefix) || author.bot) return;
 	if (!isGuildMember(msg)) {
@@ -36,11 +36,11 @@ client.on('message', msg => {
 		return;
 	}
     
-    var args = content.substring(1).split(' ');
-    var cmd = args[0];
-
+    let args = content.substring(1).split(' ');
+    const cmd = args[0];
+	
     args = args.splice(1);
-	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${JSON.stringify(args)}`);
+	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${util.inspect(args)}`);
     switch(cmd.toLowerCase()) {
         case 'ping':
             msg.reply(`pong from ${thisGuild}`);
@@ -69,7 +69,7 @@ client.on('message', msg => {
 		case 'stats':
 			msg.reply(`coming soon...`)
                 .catch(console.error);
-			stats.startDialog(msg, args);
+			stats.respond(msg, args);
 		break;	
 		case 'guinness':
 		case 'cider':
@@ -94,7 +94,7 @@ client.on('message', msg => {
 '!iam': sets a given ingame nick for your user\n
 '!stats': !NOT IMPLEMENTED YET! shows the most recent stats\n
 '!beer': Want a beer, I have one for you! (!guinness if you want the good stuff, we also have !cider)\n
-'!tea': Want a cuppa, sure, why not! (we also have !coffee, !tae and !caife\n
+'!tea': Want a cuppa, sure, why not! (we also have !coffee, !tae and !caife)\n
 '!joke': Jokes, sure..but..nobody said something about funny..right?\n
 			...more to come`)
                 .catch(console.error);
