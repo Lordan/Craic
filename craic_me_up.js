@@ -3,8 +3,9 @@ const util = require('util')
 const client = new Discord.Client();
 const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
-const whoisTools = require('./commands/whois');
+const whoisTools = require('./commands/whois.js');
 const whois = whoisTools.whois;
+const joker = require('./commands/joker.js');
 const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
 const thisGuild = "Craic";
@@ -39,14 +40,12 @@ client.on('message', msg => {
 
     args = args.splice(1);
 	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${JSON.stringify(args)}`);
-	const guild = msg.guild === null ? thisGuild : msg.guild;
     switch(cmd.toLowerCase()) {
         case 'ping':
-            msg.reply(`pong from ${guild}`);
+            msg.reply(`pong from ${thisGuild}`);
             break;
         case 'joke':
-            msg.reply(`a joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
-                .catch(console.error);
+            joker.makeAJoke(msg, args[0]);
         break;
         case 'weather':
             msg.reply(`bloody brilliant indeed, somewhere on this lovely planet at least.`)

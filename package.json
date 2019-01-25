@@ -6,6 +6,7 @@
   "dependencies": {
     "discord.js": "*",
     "jsonfile": "^5.0.0",
+    "one-liner-joke": "^1.2.0",
     "pg": "^7.8.0",
     "request": "2.81.0"
   },
