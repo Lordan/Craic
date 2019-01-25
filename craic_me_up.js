@@ -70,6 +70,7 @@ client.on('message', msg => {
                 .catch(console.error);
 		break;	
 		case 'guinness':
+		case 'cider':
 		case 'beer':
 			msg.reply(`here you go 🍺\nSláinte!`)
 				.then(sent => {
