@@ -8,7 +8,7 @@ function makeRandomJoke(msg, tag, excludeTags) {
 	let replyMsg = '';
 	if ((Math.floor(Math.random() * 10) > 7)) {
 		const guild = msg.guild === null ? thisGuild : msg.guild;
-		replyMsg = `a joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`;
+		replyMsg = `a joke? We don't do jokes here in ${guild}, ${msg.author.username}. Just go and kill some Z's you effing twat!`;
 		msg.reply(replyMsg).catch(console.error);
 		return;
 	}
