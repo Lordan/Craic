@@ -69,6 +69,7 @@ client.on('message', msg => {
 			msg.reply(`coming soon...`)
                 .catch(console.error);
 		break;	
+		case 'guinness':
 		case 'beer':
 			msg.reply(`here you go 🍺\nSláinte!`)
 				.then(sent => {
