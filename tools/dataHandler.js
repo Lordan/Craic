@@ -105,3 +105,4 @@ exports.getIngameNickByDiscordId = getIngameNickByDiscordId;
 exports.getUsernameByIngameNick = getUsernameByIngameNick;
 exports.getUserIdByDiscordId = getUserIdByDiscordId;
 exports.setIngameNick = setIngameNick;
+exports.setMinimumStats =setMinimumStats;
