@@ -71,9 +71,16 @@ client.on('message', msg => {
 		break;	
 		case 'beer':
 			msg.reply(`here you go 🍺\nSláinte!`)
-			.then(sent => {
+				.then(sent => {
 				sent.react('🍻')
                 .catch(console.error)
+			})
+			.catch(console.error);
+		break;	
+		case 'tea':
+		case 'coffee':
+			msg.reply(`careful, hot! ☕`)
+				.catch(console.error)
 			})
 			.catch(console.error);
 		break;
@@ -83,7 +90,8 @@ client.on('message', msg => {
 '!iam': sets a given ingame nick for your user\n
 '!stats': !NOT IMPLEMENTED YET! shows the most recent stats\n
 '!beer': Want a beer, I have one for you!\n
-'!joke': I'm not really doing jokes, yet..but I'm always good for a charming response to someone asking for a joke!\n
+'!tea': Want a cuppa, sure, why not!\n
+'!joke': Jokes, sure..but..nobody said something about funny..right?\n
 			...more to come`)
                 .catch(console.error);
 		break;
