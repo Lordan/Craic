@@ -27,7 +27,10 @@ async function respond(msg, args) {
             msgRespond(msg, helpMsg);
             break;
         case 'add':
-            await addMimimumStats(msg.author.id, subArgs);
+            await addMimimumStats(msg.author.id, subArgs)
+			.then(res => {
+				msgRespond(msg, `stats successfully added`)
+			});
         break;
 		default:
             msgRespond(msg, `Unknown option\n${helpMsg}`);

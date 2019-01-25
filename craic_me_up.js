@@ -68,9 +68,7 @@ client.on('message', msg => {
                 .catch(console.error);
 		break;	
 		case 'stats':
-			msg.reply(`coming soon...`)
-                .catch(console.error);
-			stats.respond(msg, args);
+			stats.respond(msg, args).catch(console.error);
 		break;	
 		case 'guinness':
 		case 'cider':

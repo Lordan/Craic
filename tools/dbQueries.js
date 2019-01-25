@@ -4,6 +4,6 @@ exports.userQueries = {
 	'getUsernameByIngameNick'	: 'SELECT u.user_name FROM users AS u WHERE u.ingame_nick = $1',
 	'getUserIdByDiscordId'		:	'SELECT u.id FROM users AS u WHERE u.discord_id = $1',
 	'setIngameNick'				: 'INSERT INTO users (discord_id, user_name, ingame_nick, guild) VALUES ($1, $2, $3, $4) ON CONFLICT (discord_id) DO UPDATE SET ingame_nick = EXCLUDED.ingame_nick',
-	'setMinimumStats'			: 'INSERT INTO stats (user_id, walkers_killed, missions_played, survivors_rescued, reported TIMESTAMP) VALUES ($1, $2, $3, $4, NOW())'
+	'setMinimumStats'			: 'INSERT INTO stats (user_id, walkers_killed, missions_played, survivors_rescued, reported) VALUES ($1, $2, $3, $4, NOW())'
 }
 
