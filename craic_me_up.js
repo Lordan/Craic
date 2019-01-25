@@ -70,11 +70,21 @@ client.on('message', msg => {
 			msg.reply(`Coming soon...`)
                 .catch(console.error);
 		break;	
+		case 'beer':
+			msg.reply(`, here you go 🍺\nSláinte!`)
+			.then(sent => {
+				sent.react('🍻')
+                .catch(console.error)
+			})
+			.catch(console.error);
+		break;
 		case 'help':
-			msg.reply(`Thanks for asking!\n\n
-			'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
-			'!iam': sets a given ingame nick for your user\n
-			'!stats': !NOT IMPLEMENTED YET! shows the most recent stats
+			msg.reply(`, thanks for asking! Here's what I can do:\n\n
+'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
+'!iam': sets a given ingame nick for your user\n
+'!stats': !NOT IMPLEMENTED YET! shows the most recent stats\n
+'!beer': Want a beer, I have one for you!\n
+'!joke': I'm not really doing jokes, yet..but I'm always good for a charming response to someone asking for a joke!\n
 			...more to come`)
                 .catch(console.error);
 		break;
