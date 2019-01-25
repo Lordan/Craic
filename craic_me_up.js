@@ -42,14 +42,14 @@ client.on('message', msg => {
 	const guild = msg.guild === null ? thisGuild : msg.guild;
     switch(cmd.toLowerCase()) {
         case 'ping':
-            msg.reply(`Pong from ${guild}`);
+            msg.reply(`pong from ${guild}`);
             break;
         case 'joke':
-            msg.reply(`A joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
+            msg.reply(`a joke? We don't do jokes here in ${guild}, ${author.username}. Just go and kill some Z's you effing twat!`)
                 .catch(console.error);
         break;
         case 'weather':
-            msg.reply(`Bloody brilliant indeed, somewhere on this lovely planet at least.`)
+            msg.reply(`bloody brilliant indeed, somewhere on this lovely planet at least.`)
                 .catch(console.error);
         break;
         case 'shutup':
@@ -63,15 +63,15 @@ client.on('message', msg => {
 			addNick(msg, args);
 		break;
 		case 'reverseLookup':
-			msg.reply(`This command was removed, please use '!whois <ingame nick>' instead`)
+			msg.reply(`this command was removed, please use '!whois <ingame nick>' instead`)
                 .catch(console.error);
 		break;	
 		case 'stats':
-			msg.reply(`Coming soon...`)
+			msg.reply(`coming soon...`)
                 .catch(console.error);
 		break;	
 		case 'beer':
-			msg.reply(`, here you go 🍺\nSláinte!`)
+			msg.reply(`here you go 🍺\nSláinte!`)
 			.then(sent => {
 				sent.react('🍻')
                 .catch(console.error)
@@ -79,7 +79,7 @@ client.on('message', msg => {
 			.catch(console.error);
 		break;
 		case 'help':
-			msg.reply(`, thanks for asking! Here's what I can do:\n\n
+			msg.reply(`thanks for asking! Here's what I can do:\n\n
 '!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
 '!iam': sets a given ingame nick for your user\n
 '!stats': !NOT IMPLEMENTED YET! shows the most recent stats\n
@@ -96,7 +96,7 @@ client.on('message', msg => {
 			console.log(`All guilds: ${util.inspect(client.guilds)}`);	
 			break;
         default:
-            msg.reply(`No effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?`)
+            msg.reply(`no effing clue what you're talking about, ${author.username}. What you mean by '${cmd}'?`)
                 .catch(console.error);
         }
 });
