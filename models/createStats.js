@@ -6,7 +6,7 @@ const client = new Client({
 });
 
 client.connect().then(() => {
-	client.query('CREATE TABLE stats(id SERIAL PRIMARY KEY, user_id  INT not null, walkers_killed INT, humans_defeated INT, missions_played INT, missions_completed, shots_fired INT, stash_collected INT, total_power_heroes INT, total_power_weapons INT, cards_collected INT, survivors_rescued INT, reported TIMESTAMP)')
+	client.query('CREATE TABLE stats(id SERIAL PRIMARY KEY, user_id  INT not null, walkers_killed INT, humans_defeated INT, missions_played INT, missions_completed INT, shots_fired INT, stash_collected INT, total_power_heroes INT, total_power_weapons INT, cards_collected INT, survivors_rescued INT, reported TIMESTAMP)')
 		.then(()  => {
 		console.log("Success!");
 		client.end();
