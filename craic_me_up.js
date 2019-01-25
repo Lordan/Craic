@@ -7,6 +7,7 @@ const whoisTools = require('./commands/whois.js');
 const whois = whoisTools.whois;
 const joker = require('./commands/joker.js');
 const stats = require('./commands/stats.js');
+const helpMsg = require('./tools/helper.js').mainHelp;
 const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
 const thisGuild = "Craic";
@@ -89,14 +90,7 @@ client.on('message', msg => {
 				.catch(console.error);
 		break;
 		case 'help':
-			msg.reply(`thanks for asking! Here's what I can do:\n\n
-'!whois': tries to find the ingame nick for a given user or the user for a given ingame nick.\n
-'!iam': sets a given ingame nick for your user\n
-'!stats': !NOT IMPLEMENTED YET! shows the most recent stats\n
-'!beer': Want a beer, I have one for you! (!guinness if you want the good stuff, we also have !cider)\n
-'!tea': Want a cuppa, sure, why not! (we also have !coffee, !tae and !caife)\n
-'!joke': Jokes, sure..but..nobody said something about funny..right?\n
-			...more to come`)
+			msg.reply(helpMsg)
                 .catch(console.error);
 		break;
 		case 'debug':

@@ -1,5 +1,6 @@
 const util = require('util')
 const dataHandler = require('../tools/dataHandler.js');
+const helpMsg = require('../tools/helper.js').whoisHelp;
 const setIngameNick = dataHandler.setIngameNick;
 const getIngameNickByDiscordId = dataHandler.getIngameNickByDiscordId;
 const getIngameNickByUsername = dataHandler.getIngameNickByUsername;
@@ -26,12 +27,8 @@ async function whois(msg, args) {
 	replyMsg = `Nothing found for ${searchParam}`;
 	
 	if (searchParam == "help" || searchParam == "?") {
-		replyMsg = `Usage:\n
-			!whois <@user>\n
-			!whois <username>\n
-			!whois <ingame nick>`;
-			respond(msg, replyMsg);
-			return;
+		respond(msg, helpMsg);
+		return;
 	}
 	
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {

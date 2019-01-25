@@ -17,6 +17,17 @@ function respond(msg, args) {
 	}
 	const subCmd = args[0];
 	const subArgs = args.splice(1);
+	
+	if (subCmd == "help" || subCmd == "?") {
+		replyMsg = `Usage:\n
+!stats\n
+\tshows the stats of the latest term\n
+!stats add <kills> <missions played> <survivors>\n
+\tadd the given numbers for the current term and your user.\n 
+\te.g. !stats add 123456 23456 3456 for 123456 kills, 23456 missions played and 3456 survivors rescued`;
+			respond(msg, replyMsg);
+			return;
+	}
 }
 
 exports.respond = respond;
