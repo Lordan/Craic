@@ -1,6 +1,7 @@
 const util = require('util')
 const dataHandler = require('../tools/dataHandler.js');
 const getUserIdByDiscordId = dataHandler.getUserIdByDiscordId;
+const setMinimumStats = dataHandler.setMinimumStats;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').statsHelp;
 
@@ -50,8 +51,8 @@ async function addMimimumStats(discordId, args) {
 			console.error(`addMimimumStats() - user not found, ${util.inspect(result)}`);
 			return Promise.reject(new Error('User not found'));
 	}
-	const user_id = userId = result.rows[0].id;	
-	console.log(`Would insert user_id ${user_id} and kills ${kills}, missions ${missions} and survivors ${survivors}`); 
+	const userId = userId = result.rows[0].id;	
+	let result = await setMinimumStats(userId, kills, missions, survivors);
 }
 
 exports.respond = respond;

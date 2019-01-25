@@ -72,6 +72,23 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 	return promise;
 }
 
+function setMinimumStats(userId, kills, missions, survivors) {
+	console.log(`setMinimumStats() - received [${userId}, ${kills}, ${missions}, ${survivors}] `);
+	let promise = new Promise((resolve, reject) => {
+		if (discordId === null || discordId.trim().length < 1) reject('No discord id given');
+		if (username === null || username.trim().length < 1) reject('No username given');
+		if (ingameNick === null || ingameNick.trim().length < 1) reject('No ingame nick given');
+		if (guild === null || guild.trim().length < 1) reject('No guild given');
+		const query = {
+			text : userQueries.setMinimumStats,
+			values: [userId, kills, missions, survivors]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
 function executeQuery(resolve, reject, query) {	
 	db.query(query)
 			.then(res => {
