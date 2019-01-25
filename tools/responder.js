@@ -8,4 +8,10 @@ function respond(receivedMsg, response) {
 		.catch(console.error);
 }
 
+async function getDM(receivedMsg) {
+	let dmChannel = await receivedMsg.author.createDM();
+	return dmChannel;;
+}
+
 exports.respond = respond;
+exports.getDM = getDM;
