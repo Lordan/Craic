@@ -52,7 +52,7 @@ async function addMimimumStats(discordId, args) {
 			return Promise.reject(new Error('User not found'));
 	}
 	const userId = userId = result.rows[0].id;	
-	let result = await setMinimumStats(userId, kills, missions, survivors);
+	let insertResult = await setMinimumStats(userId, kills, missions, survivors);
 }
 
 exports.respond = respond;
