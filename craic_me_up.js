@@ -81,9 +81,7 @@ client.on('message', msg => {
 		case 'tea':
 		case 'coffee':
 			msg.reply(`careful, hot! ☕`)
-				.catch(console.error)
-			})
-			.catch(console.error);
+				.catch(console.error);
 		break;
 		case 'help':
 			msg.reply(`thanks for asking! Here's what I can do:\n\n
