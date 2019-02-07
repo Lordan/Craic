@@ -73,6 +73,7 @@ client.on('message', msg => {
 		case 'guinness':
 		case 'cider':
 		case 'beer':
+		case 'pint':
 			msg.reply(`here you go 🍺\nSláinte!`)
 				.then(sent => {
 				sent.react('🍻')
