@@ -173,7 +173,7 @@ async function getAllTileClaims() {
 		claims += `\ttile ${tileNumber} is claimed by ${userName}\n`;
 	}
 	
-	return `following tiles are claimed:\n`;
+	return `following tiles are claimed:\n ${claims}`;
 }
 
 async function getUserId(discordId) {
