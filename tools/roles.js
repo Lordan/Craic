@@ -1,8 +1,10 @@
 const roles = {
-	'leader' : 'leaders'
+	'leader' : 'leaders',
+	'member' : 'members'	
 };
 const roleCheck = {
-	'isLeader'	:	matchRole(roles.leader)
+	'isLeader'	:	matchRole(roles.leader),
+	'isMember'	:	matchRole(roles.member)
 };
 
 

@@ -160,6 +160,18 @@ function getTile(tileNumber) {
 	return promise;
 }
 
+function getAllTiles() {
+	console.log(`getTile() - called `);
+	let promise = new Promise((resolve, reject) => {
+		const query = {
+			text : tileQueries.getAllTiles
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
 function executeQuery(resolve, reject, query) {	
 	db.query(query)
 			.then(res => {
@@ -182,3 +194,4 @@ exports.setTile = setTile;
 exports.clearTile = clearTile;
 exports.clearAllTiles = clearAllTiles;
 exports.getTile = getTile;
+exports.getAllTiles = getAllTiles;

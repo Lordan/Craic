@@ -6,6 +6,7 @@ const setTile = dataHandler.setTile;
 const clearTile = dataHandler.clearTile;
 const clearAllTiles = dataHandler.clearAllTiles;
 const getTile = dataHandler.getTile;
+const getAllTiles = dataHandler.getAllTiles;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').tilesHelp;
 const roleCheck = require('../tools/roles.js').roleCheck;
@@ -40,11 +41,19 @@ async function respond(msg, args) {
 			});
         break;
 		case 'get':
-            await getTileClaim(msg.author.id, subArgs)
-			.then(res => {
-				msg.reply(res)
-                .catch(console.error);
-			});
+			if (subArgs[0] == 'all') {
+				await getAllTileClaims()
+				.then(res => {
+					msg.reply(res)
+					.catch(console.error);
+				});
+			} else {
+				await getTileClaim(subArgs)
+				.then(res => {
+					msg.reply(res)
+					.catch(console.error);
+				});
+			}
         break;
 		case 'clear':
             await clearTileClaim(msg.author.id, subArgs)
@@ -64,6 +73,10 @@ async function respond(msg, args) {
 }
 
 async function setTileClaim(discordId, args) {
+	
+	if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+		return `insufficient priviligies to set a claim`;
+	}
 	
 	if (!args || args.length < 1) {
 		console.error(`setTileClaim() - missing argument, ${args}`);
@@ -121,7 +134,7 @@ async function clearAllTileClaims(msg) {
 }
 
 
-async function getTileClaim(discordId, args) {
+async function getTileClaim(args) {
 	
 	if (!args || args.length < 1) {
 		console.error(`getTileClaim() - missing argument, ${args}`);
@@ -137,6 +150,23 @@ async function getTileClaim(discordId, args) {
 	const userId = tileClaimResult.rows[0].user_id;
 	const userName  = await getUserName(userId);
 	return `tile ${tileNumber} is claimed by ${userName}`;
+}
+
+async function getAllTileClaims() {
+	
+	let tileClaimResult = await getAllTiles();
+	if (tileClaimResult.rowCount == 0 || !tileClaimResult.rows[0].user_id) {
+			return `No claim found for tile ${tileNumber}`;
+	}
+	let claims;
+	for (row of tileClaimResult.rows) {
+		const userId = row.user_id;
+		const tileNumber = row.tile;
+		const userName  = await getUserName(userId);
+		claims += `\ttile ${tileNumber} is claimed by ${userName}\n`;
+	}
+	
+	return `following tiles are claimed:\n`;
 }
 
 async function getUserId(discordId) {
