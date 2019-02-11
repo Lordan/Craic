@@ -17,8 +17,14 @@ async function respond(msg, args) {
 		msgRespond(msg, `No action provided\n${helpMsg}`);
 		return;
 	}
+	
+	
+	console.log(`Received: ${args}`);
+	
 	const subCmd = args[0];
 	const subArgs = args.splice(1);
+	
+	console.log(`Received subCmd: ${subCmd}, args: ${subArgs}`);
 	
 	switch(subCmd.toLowerCase()) {
         case 'help':
@@ -32,15 +38,15 @@ async function respond(msg, args) {
 			});
         break;
 		case 'get':
-            await getTileClaim(msg.author.id, subArgs)
+            let response = await getTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, `stats successfully added`);
+				msgRespond(msg, response);
 			});
         break;
 		case 'clear':
-            await clearTileClaim(msg.author.id, subArgs)
+            let response = await clearTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, `stats successfully added`);
+				msgRespond(msg, response);
 			});
         break;
 		default:
