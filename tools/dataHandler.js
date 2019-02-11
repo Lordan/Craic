@@ -134,6 +134,18 @@ function clearTile(userId, tileNumber) {
 	return promise;
 }
 
+function clearAllTiles() {
+	console.log(`clearTile() - called `);
+	let promise = new Promise((resolve, reject) => {
+		const query = {
+			text : tileQueries.clearAllTiles
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
 function getTile(tileNumber) {
 	console.log(`getTile() - received [${tileNumber}] `);
 	let promise = new Promise((resolve, reject) => {
@@ -168,4 +180,5 @@ exports.setIngameNick = setIngameNick;
 exports.setMinimumStats = setMinimumStats;
 exports.setTile = setTile;
 exports.clearTile = clearTile;
+exports.clearAllTiles = clearAllTiles;
 exports.getTile = getTile;

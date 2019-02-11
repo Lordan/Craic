@@ -15,5 +15,6 @@ exports.tileQueries = {
 	'setTile'					:	'INSERT INTO tiles (user_id, tile, reported) VALUES ($1, $2, NOW())',
 	'getTile'					:	'SELECT t.user_id FROM tiles AS t WHERE t.tile = $1',
 	'clearTile'					:	'DELETE FROM tiles WHERE tiles.user_id = $1 AND tiles.tile = $2'
+	'clearAllTiles'					:	'DELETE FROM tiles'
 }
 

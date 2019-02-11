@@ -7,6 +7,7 @@ const clearTile = dataHandler.clearTile;
 const getTile = dataHandler.getTile;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').tilesHelp;
+const roleCheck = require('./tools/roles.js').roleCheck;
 
 async function respond(msg, args) {
 	if (msg === null) return;
@@ -45,6 +46,12 @@ async function respond(msg, args) {
         break;
 		case 'clear':
             await clearTileClaim(msg.author.id, subArgs)
+			.then(res => {
+				msgRespond(msg, res);
+			});
+        break;
+		case 'flipped':
+			await clearAllTileClaims(msg)
 			.then(res => {
 				msgRespond(msg, res);
 			});
@@ -96,6 +103,26 @@ async function clearTileClaim(discordId, args) {
 	}
 	return `tile ${tileNumber} successfully cleared`;
 }
+
+async function clearAllTileClaims(msg) {
+	
+	if (!args || args.length < 1) {
+		console.error(`clearTileClaim() - missing argument, ${args}`);
+		return Promise.reject(new Error('Insufficient number of arguments'));
+	}
+	
+	if(!roleCheck.isLeader(msg) {
+		return `insufficient priviligies to clear all claims`;
+	}	
+	
+	let clearAllClaimsResult = await clearAllTiles(userId, tileNumber);
+	if (clearAllClaimsResult.rowCount == 0) {
+			console.error(`clearAllTileClaims() - failed to clear tile claim, ${util.inspect(clearAllClaimsResult)}`);
+			return Promise.reject(new Error('Failed to clear tile claim'));
+	}
+	return `${clearAllClaimsResult.rowCount} claims successfully cleared`;
+}
+
 
 async function getTileClaim(discordId, args) {
 	
