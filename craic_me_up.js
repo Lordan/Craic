@@ -60,6 +60,9 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
+		case 'tiles'@
+			tileManager(msg, args).catch(console.error);
+			break;
 		case 'whois':
 			whois(msg, args).catch(console.error);
 		break;

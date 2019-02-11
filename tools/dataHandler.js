@@ -1,5 +1,7 @@
 const db = require('../db')
 const userQueries = require('./dbQueries.js').userQueries;
+const statsQueries = require('./dbQueries.js').statsQueries;
+const tileQueries = require('./dbQueries.js').tileQueries;
 
 function getIngameNickByUsername(username) {	
 	console.log(`getIngameNickByUsername() - received ${username}`);
@@ -36,6 +38,19 @@ function getUsernameByIngameNick(ingameNick) {
 		const query = {
 			text : userQueries.getUsernameByIngameNick,
 			values: [ingameNick]
+		};
+		executeQuery(resolve, reject, query);		
+	});	
+	return promise;	
+}
+
+function getUsernameByUserId(userId) {
+	console.log(`getUsernameByUserId() - received ${userId}`);
+	let promise = new Promise((resolve, reject) => {
+		if (userId === null || userId.trim().length < 1) reject('No user id given');
+		const query = {
+			text : userQueries.getUsernameByUserId,
+			values: [userId]
 		};
 		executeQuery(resolve, reject, query);		
 	});	
@@ -80,8 +95,52 @@ function setMinimumStats(userId, kills, missions, survivors) {
 		if (missions === null) reject('No number of missions given');
 		if (survivors === null) reject('No number of survivors given');
 		const query = {
-			text : userQueries.setMinimumStats,
+			text : statsQueries.setMinimumStats,
 			values: [userId, kills, missions, survivors]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
+function setTile(userId, tileNumber) {
+	console.log(`setTile() - received [${userId}, ${tileNumber}] `);
+	let promise = new Promise((resolve, reject) => {
+		if (userId === null) reject('No user id given');
+		if (tileNumber === null) reject('No tile number given');
+		const query = {
+			text : tileQueries.setTile,
+			values: [userId, tileNumber]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
+function clearTile(userId, tileNumber) {
+	console.log(`clearTile() - received [${userId}, ${tileNumber}] `);
+	let promise = new Promise((resolve, reject) => {
+		if (userId === null) reject('No user id given');
+		if (tileNumber === null) reject('No tile number given');
+		const query = {
+			text : tileQueries.clearTile,
+			values: [userId, tileNumber]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
+function getTile(tileNumber) {
+	console.log(`getTile() - received [${tileNumber}] `);
+	let promise = new Promise((resolve, reject) => {
+		if (tileNumber === null) reject('No tile number given');
+		const query = {
+			text : tileQueries.getTile,
+			values: [tileNumber]
 		};
 		executeQuery(resolve, reject, query);		
 	});
@@ -104,5 +163,9 @@ exports.getIngameNickByUsername = getIngameNickByUsername;
 exports.getIngameNickByDiscordId = getIngameNickByDiscordId;
 exports.getUsernameByIngameNick = getUsernameByIngameNick;
 exports.getUserIdByDiscordId = getUserIdByDiscordId;
+exports.getUsernameByUserId = getUsernameByUserId;
 exports.setIngameNick = setIngameNick;
-exports.setMinimumStats =setMinimumStats;
+exports.setMinimumStats = setMinimumStats;
+exports.setTile = setTile;
+exports.clearTile = clearTile;
+exports.getTile = getTile;
