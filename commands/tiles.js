@@ -74,10 +74,6 @@ async function respond(msg, args) {
 
 async function setTileClaim(discordId, args) {
 	
-	if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
-		return `insufficient priviligies to set a claim`;
-	}
-	
 	if (!args || args.length < 1) {
 		console.error(`setTileClaim() - missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));

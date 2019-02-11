@@ -9,6 +9,7 @@ const tileManager = require('./commands/tiles.js');
 const joker = require('./commands/joker.js');
 const stats = require('./commands/stats.js');
 const helpMsg = require('./tools/helper.js').mainHelp;
+const roleCheck = require('./tools/roles.js').roleCheck;
 const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
 const thisGuild = "Craic";
@@ -63,7 +64,11 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
-		case 'tiles':
+		case 'tiles':		
+			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+				msg.reply(`claims for tiles can only be set by guild members, sorry.`)
+					.catch(console.error);
+			}
 			tileManager.respond(msg, args).catch(console.error);
 			break;
 		case 'whois':
@@ -77,6 +82,10 @@ client.on('message', msg => {
                 .catch(console.error);
 		break;	
 		case 'stats':
+			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+				msg.reply(`stats command are only available for guild members, sorry.`)
+					.catch(console.error);
+			}
 			stats.respond(msg, args).catch(console.error);
 		break;	
 		case 'guinness':
