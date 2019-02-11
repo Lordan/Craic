@@ -38,7 +38,7 @@ client.on('message', msg => {
 	}
     
     let args = content.substring(1).split(' ');
-    const cmd = args[0];
+    let cmd = args[0];
 	
 	if (cmd.trim() == "") {
 		cmd = args[1];
