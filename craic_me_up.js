@@ -44,6 +44,8 @@ client.on('message', msg => {
 	if (cmd.trim() == "") {
 		cmd = args[1];
 		args = args.splice(2);
+	} else {
+		args = args.splice(1);
 	}
 	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${util.inspect(args)}`);
     switch(cmd.toLowerCase()) {
