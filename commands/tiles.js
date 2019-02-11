@@ -111,7 +111,7 @@ async function clearAllTileClaims(msg) {
 		return Promise.reject(new Error('Insufficient number of arguments'));
 	}
 	
-	if(!roleCheck.isLeader(msg) {
+	if(!roleCheck.isLeader(msg)) {
 		return `insufficient priviligies to clear all claims`;
 	}	
 	
