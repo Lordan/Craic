@@ -47,7 +47,7 @@ function getUsernameByIngameNick(ingameNick) {
 function getUsernameByUserId(userId) {
 	console.log(`getUsernameByUserId() - received ${userId}`);
 	let promise = new Promise((resolve, reject) => {
-		if (userId === null || userId.trim().length < 1) reject('No user id given');
+		if (userId === null || userId.isNaN) reject('No user id given');
 		const query = {
 			text : userQueries.getUsernameByUserId,
 			values: [userId]
