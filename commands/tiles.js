@@ -165,7 +165,7 @@ async function getAllTileClaims() {
 	if (tileClaimResult.rowCount == 0 || !tileClaimResult.rows[0].user_id) {
 			return `No claims found!`;
 	}
-	let claims;
+	let claims = "";
 	for (row of tileClaimResult.rows) {
 		const userId = row.user_id;
 		const tileNumber = row.tile;
