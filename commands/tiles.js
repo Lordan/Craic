@@ -7,7 +7,7 @@ const clearTile = dataHandler.clearTile;
 const getTile = dataHandler.getTile;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').tilesHelp;
-const roleCheck = require('./tools/roles.js').roleCheck;
+const roleCheck = require('../tools/roles.js').roleCheck;
 
 async function respond(msg, args) {
 	if (msg === null) return;
