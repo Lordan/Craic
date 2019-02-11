@@ -142,24 +142,6 @@ async function getTileClaim(discordId, args) {
 	return `tile ${tileNumber} is claimed by ${userName}`;
 }
 
-async function getTileClaimUserdiscordId, args) {
-	
-	if (!args || args.length < 1) {
-		console.error(`getTileClaim() - missing argument, ${args}`);
-		return Promise.reject(new Error('Insufficient number of arguments'));
-	}
-		
-	const tileNumber = args[0]; 
-	
-	let tileClaimResult = await getTile(tileNumber);
-	if (tileClaimResult.rowCount == 0 || !tileClaimResult.rows[0].user_id) {
-			return null;
-	}
-	const userId = tileClaimResult.rows[0].user_id;
-	const userName  = await getUserName(userId);
-	return userName;
-}
-
 async function getUserId(discordId) {
 	let result = await getUserIdByDiscordId(discordId);
 	
