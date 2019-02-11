@@ -65,6 +65,11 @@ async function setTileClaim(discordId, args) {
 		
 	const tileNumber = args[0]; 
 	
+	const claimedUserName = await getTileClaimUser(tileNumber);
+	if (claimedUserName !== null) {
+		return `tile ${tileNumber} already claimed by ${claimedUserName}`;
+	}
+	
 	let insertResult = await setTile(userId, tileNumber);
 	if (insertResult.rowCount == 0) {
 			console.error(`setTileClaim() - failed to set tile claim, ${util.inspect(insertResult)}`);
@@ -82,7 +87,7 @@ async function clearTileClaim(discordId, args) {
 
 	let userId = await getUserId(discordId);
 		
-	const tileNumber = args[0]; 
+	const tileNumber = args[0]; 	
 	
 	let clearClaimResult = await clearTile(userId, tileNumber);
 	if (clearClaimResult.rowCount == 0) {
@@ -107,7 +112,25 @@ async function getTileClaim(discordId, args) {
 	}
 	const userId = tileClaimResult.rows[0].user_id;
 	const userName  = await getUserName(userId);
-	return `tile ${tileNumber} is already claimed by claimed ${userName}`;
+	return `tile ${tileNumber} is claimed by ${userName}`;
+}
+
+async function getTileClaimUserdiscordId, args) {
+	
+	if (!args || args.length < 1) {
+		console.error(`getTileClaim() - missing argument, ${args}`);
+		return Promise.reject(new Error('Insufficient number of arguments'));
+	}
+		
+	const tileNumber = args[0]; 
+	
+	let tileClaimResult = await getTile(tileNumber);
+	if (tileClaimResult.rowCount == 0 || !tileClaimResult.rows[0].user_id) {
+			return null;
+	}
+	const userId = tileClaimResult.rows[0].user_id;
+	const userName  = await getUserName(userId);
+	return userName;
 }
 
 async function getUserId(discordId) {
