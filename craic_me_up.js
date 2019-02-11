@@ -64,7 +64,8 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
-		case 'tiles':		
+		case 'tiles':	
+		case 'tile':
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`claims for tiles can only be set by guild members, sorry.`)
 					.catch(console.error);
