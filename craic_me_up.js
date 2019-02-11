@@ -40,9 +40,9 @@ client.on('message', msg => {
     let args = content.substring(1).split(' ');
     const cmd = args[0];
 	
-    args = args.splice(1);
-	if (args[0].trim() == "") {
-		args = args.splice(1);
+	if (cmd.trim() == "") {
+		cmd = args[1];
+		args = args.splice(2);
 	}
 	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${util.inspect(args)}`);
     switch(cmd.toLowerCase()) {
