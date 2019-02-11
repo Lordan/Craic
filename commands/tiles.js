@@ -32,21 +32,21 @@ async function respond(msg, args) {
             msgRespond(msg, helpMsg);
             break;
         case 'set':
-            let response = await setTileClaim(msg.author.id, subArgs)
+            await setTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, response)
+				msgRespond(msg, res)
 			});
         break;
 		case 'get':
-            let response = await getTileClaim(msg.author.id, subArgs)
+            await getTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, response);
+				msgRespond(msg, res);
 			});
         break;
 		case 'clear':
-            let response = await clearTileClaim(msg.author.id, subArgs)
+            await clearTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, response);
+				msgRespond(msg, res);
 			});
         break;
 		default:
