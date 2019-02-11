@@ -112,7 +112,7 @@ async function clearAllTileClaims(msg) {
 		return `insufficient priviligies to clear all claims`;
 	}	
 	
-	let clearAllClaimsResult = await clearAllTiles(userId, tileNumber);
+	let clearAllClaimsResult = await clearAllTiles();
 	if (clearAllClaimsResult.rowCount == 0) {
 			console.error(`clearAllTileClaims() - failed to clear tile claim, ${util.inspect(clearAllClaimsResult)}`);
 			return Promise.reject(new Error('Failed to clear tile claim'));
