@@ -41,6 +41,9 @@ client.on('message', msg => {
     const cmd = args[0];
 	
     args = args.splice(1);
+	if (args[0].trim() == "") {
+		args = args.splice(1);
+	}
 	console.log(`Command ${cmd} received, message.guild: ${msg.guild}, args: ${util.inspect(args)}`);
     switch(cmd.toLowerCase()) {
         case 'ping':
