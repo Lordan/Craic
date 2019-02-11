@@ -5,6 +5,7 @@ const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
 const whoisTools = require('./commands/whois.js');
 const whois = whoisTools.whois;
+const tileManager = require('./commands/tiles.js');
 const joker = require('./commands/joker.js');
 const stats = require('./commands/stats.js');
 const helpMsg = require('./tools/helper.js').mainHelp;
@@ -60,8 +61,8 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
-		case 'tiles'@
-			tileManager(msg, args).catch(console.error);
+		case 'tiles':
+			tileManager.respond(msg, args).catch(console.error);
 			break;
 		case 'whois':
 			whois(msg, args).catch(console.error);
