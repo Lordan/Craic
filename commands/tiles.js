@@ -83,7 +83,7 @@ async function setTileClaim(discordId, args) {
 		
 	const tileNumber = args[0]; 
 	
-	const claimedUserName = await getTileClaimUser(tileNumber);
+	const claimedUserName = await getTileClaim(tileNumber);
 	if (claimedUserName !== null) {
 		return `tile ${tileNumber} already claimed by ${claimedUserName}`;
 	}
