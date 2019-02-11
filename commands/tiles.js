@@ -4,6 +4,7 @@ const getUserIdByDiscordId = dataHandler.getUserIdByDiscordId;
 const getUsernameByUserId = dataHandler.getUsernameByUserId;
 const setTile = dataHandler.setTile;
 const clearTile = dataHandler.clearTile;
+const clearAllTiles = dataHandler.clearAllTiles;
 const getTile = dataHandler.getTile;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').tilesHelp;
@@ -41,7 +42,8 @@ async function respond(msg, args) {
 		case 'get':
             await getTileClaim(msg.author.id, subArgs)
 			.then(res => {
-				msgRespond(msg, res);
+				msg.reply(res)
+                .catch(console.error);
 			});
         break;
 		case 'clear':
