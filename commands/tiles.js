@@ -106,11 +106,6 @@ async function clearTileClaim(discordId, args) {
 
 async function clearAllTileClaims(msg) {
 	
-	if (!args || args.length < 1) {
-		console.error(`clearTileClaim() - missing argument, ${args}`);
-		return Promise.reject(new Error('Insufficient number of arguments'));
-	}
-	
 	if(!roleCheck.isLeader(msg)) {
 		return `insufficient priviligies to clear all claims`;
 	}	
