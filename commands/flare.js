@@ -5,7 +5,7 @@ const defaultCmd = 'announce';
 const fileName = "flare";
 
 async function respond(msg, args) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.respond() -`;
 	if (msg === null) return;
 	let replyMsg = '';
 	
@@ -33,7 +33,7 @@ async function respond(msg, args) {
 }
 
 async function announce(msg) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.announce() -`;
 	const announceChannelName = 'flares'
 	const generalChan = msg.member.guild.channels.find(ch => ch.name == announceChannelName);
 	if (!generalChan) {

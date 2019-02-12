@@ -13,7 +13,7 @@ const roleCheck = require('../tools/roles.js').roleCheck;
 const fileName = "tiles";
 
 async function respond(msg, args) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.respond() -`;
 	if (msg === null) return;
 	let replyMsg = '';
 	
@@ -72,7 +72,7 @@ async function respond(msg, args) {
 }
 
 async function setTileClaim(discordId, args) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.setTileClaim() -`;
 	if (!args || args.length < 1) {
 		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
@@ -96,7 +96,7 @@ async function setTileClaim(discordId, args) {
 }
 
 async function clearTileClaim(discordId, args) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.clearTileClaim() -`;
 	if (!args || args.length < 1) {
 		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
@@ -115,7 +115,7 @@ async function clearTileClaim(discordId, args) {
 }
 
 async function clearAllTileClaims(msg) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.clearAllTileClaims() -`;
 	if(!roleCheck.isLeader(msg)) {
 		return `insufficient priviligies to clear all claims`;
 	}	
@@ -130,7 +130,7 @@ async function clearAllTileClaims(msg) {
 
 
 async function getTileClaim(args) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.getTileClaim() -`;
 	if (!args || args.length < 1) {
 		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
@@ -176,7 +176,7 @@ async function getAllTileClaims() {
 }
 
 async function getUserId(discordId) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.getUserId() -`;
 	let result = await getUserIdByDiscordId(discordId);
 	
 	if (result.rowCount == 0 || !result.rows[0].id) {
@@ -188,7 +188,7 @@ async function getUserId(discordId) {
 }
 
 async function getUserName(userId) {
-	const logHead = `${fileName}.${this.name} -`;
+	const logHead = `${fileName}.getUserName() -`;
 	let result = await getUsernameByUserId(userId);
 	
 	if (result.rowCount == 0 || !result.rows[0].user_name) {
