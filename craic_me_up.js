@@ -26,7 +26,7 @@ client.on('guildMemberAdd', member => {
     // channel wasn't found on this server
     if (!channel) return;
     
-	channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTAN: please add your ingame nick by using !iam <ingame nick>, thx!`);
+	channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTANT: please add your ingame nick by using !iam <ingame nick>, thx!`);
 	
 	//notify the leaders/officers of a new member
 	const seriousChan = member.guild.channels.find(ch => ch.name === 'seriouscraic');

@@ -22,7 +22,8 @@ async function respond(msg, args) {
 	const subArgs = args.splice(1);
 	
 	switch(subCmd.toLowerCase()) {
-        case 'help':
+        case '--help':
+		case '-h':
 		case '?':
             msgRespond(msg, helpMsg);
             break;

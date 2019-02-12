@@ -29,7 +29,8 @@ async function respond(msg, args) {
 	console.log(`${logHead} received subCmd: ${subCmd}, args: ${subArgs}`);
 	
 	switch(subCmd.toLowerCase()) {
-        case 'help':
+        case '--help':
+		case '-h':
 		case '?':
             msgRespond(msg, helpMsg);
             break;
