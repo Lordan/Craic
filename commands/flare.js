@@ -40,7 +40,7 @@ async function announce(msg) {
 		console.error(`${logHead} failed to find channel ${announceChannelName}`);
 		return;
 	}
-	generalChan.send(`@here flare up, have fun and hit it hard!`);
+	generalChan.send(`@here flare up, have fun and hit it hard!`).catch(console.error);
 }
 
 exports.respond = respond;
