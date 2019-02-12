@@ -1,7 +1,6 @@
 const util = require('util');
 const helpMsg = require('../tools/helper.js').flareHelp;
 const msgRespond = require('../tools/responder.js').respond;
-const roleCheck = require('../tools/roles.js').roleCheck;
 const defaultCmd = 'announce';
 const fileName = "flare";
 
@@ -33,7 +32,7 @@ async function respond(msg, args) {
 	}	
 }
 
-async function announce() {
+async function announce(msg) {
 	const logHead = `${fileName}.${this.name} -`;
 	const announceChannelName = 'general'
 	const generalChan = msg.member.guild.channels.find(ch => ch.name == announceChannelName);
