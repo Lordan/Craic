@@ -31,7 +31,7 @@ client.on('guildMemberAdd', member => {
 	//notify the leaders/officers of a new member
 	const seriousChan = member.guild.channels.find(ch => ch.name === 'seriouscraic');
 	if (!seriousChan) return;
-	seriousChan.send(`@leaders we have a new member in the welcome channel. Please verify that it is a guild use and add the 'members' role to their account which will add them to the general channel.`);
+	seriousChan.send(`@leaders ${member} joined the welcome channel. Please verify that it is a guild use and add the 'members' role to their account which will add them to the general channel.`);
 });
 
 client.on('message', msg => {

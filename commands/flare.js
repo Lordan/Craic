@@ -34,13 +34,13 @@ async function respond(msg, args) {
 
 async function announce(msg) {
 	const logHead = `${fileName}.${this.name} -`;
-	const announceChannelName = 'general'
+	const announceChannelName = 'flares'
 	const generalChan = msg.member.guild.channels.find(ch => ch.name == announceChannelName);
 	if (!generalChan) {
 		console.error(`${logHead} failed to find channel ${announceChannelName}`);
 		return;
 	}
-	generalChan.send(`@everyone flare up, have fun and hit it hard!`);
+	generalChan.send(`@here flare up, have fun and hit it hard!`);
 }
 
 exports.respond = respond;
