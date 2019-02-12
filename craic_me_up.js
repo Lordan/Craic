@@ -70,7 +70,6 @@ client.on('message', msg => {
                 .catch(console.error);
         break;
 		case 'flare':
-		case 'flares':
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`flares can only be announced by guild members, sorry.`)
 					.catch(console.error);
