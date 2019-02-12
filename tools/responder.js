@@ -1,6 +1,6 @@
 function respond(receivedMsg, response) {
-	receivedMsg.author.createDM()
-		.then((dmChannel) => {
+
+	getDM(receivedMsg).then((dmChannel) => {
 			response = response || 'Something went wrong, please try again!';
 			dmChannel.send(response)
 				.catch(console.error);
@@ -10,7 +10,7 @@ function respond(receivedMsg, response) {
 
 async function getDM(receivedMsg) {
 	let dmChannel = await receivedMsg.author.createDM();
-	return dmChannel;;
+	return dmChannel;
 }
 
 exports.respond = respond;

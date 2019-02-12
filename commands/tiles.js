@@ -1,4 +1,4 @@
-const util = require('util')
+const util = require('util');
 const dataHandler = require('../tools/dataHandler.js');
 const getUserIdByDiscordId = dataHandler.getUserIdByDiscordId;
 const getUsernameByUserId = dataHandler.getUsernameByUserId;
@@ -10,24 +10,23 @@ const getAllTiles = dataHandler.getAllTiles;
 const msgRespond = require('../tools/responder.js').respond;
 const helpMsg = require('../tools/helper.js').tilesHelp;
 const roleCheck = require('../tools/roles.js').roleCheck;
+const fileName = "tiles";
 
 async function respond(msg, args) {
+	const logHead = `${fileName}.${this.name} -`;
 	if (msg === null) return;
 	let replyMsg = '';
 	
 	if (args === null || !(args instanceof Array) || args.length == 0) {
-		console.log(`Member: ${util.inspect(msg.member)}`);
+		console.log(`${logHead} member: ${util.inspect(msg.member)}`);
 		msgRespond(msg, `No action provided\n${helpMsg}`);
 		return;
 	}
-	
-	
-	console.log(`Received: ${args}`);
-	
+		
 	const subCmd = args[0];
 	const subArgs = args.splice(1);
 	
-	console.log(`Received subCmd: ${subCmd}, args: ${subArgs}`);
+	console.log(`${logHead} received subCmd: ${subCmd}, args: ${subArgs}`);
 	
 	switch(subCmd.toLowerCase()) {
         case 'help':
@@ -73,9 +72,9 @@ async function respond(msg, args) {
 }
 
 async function setTileClaim(discordId, args) {
-	
+	const logHead = `${fileName}.${this.name} -`;
 	if (!args || args.length < 1) {
-		console.error(`setTileClaim() - missing argument, ${args}`);
+		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
 	}
 
@@ -90,16 +89,16 @@ async function setTileClaim(discordId, args) {
 	
 	let insertResult = await setTile(userId, tileNumber);
 	if (insertResult.rowCount == 0) {
-			console.error(`setTileClaim() - failed to set tile claim, ${util.inspect(insertResult)}`);
+			console.error(`${logHead} failed to set tile claim, ${util.inspect(insertResult)}`);
 			return Promise.reject(new Error('Failed to set tile claim'));
 	}
 	return `tile ${tileNumber} successfully claimed`;
 }
 
 async function clearTileClaim(discordId, args) {
-	
+	const logHead = `${fileName}.${this.name} -`;
 	if (!args || args.length < 1) {
-		console.error(`clearTileClaim() - missing argument, ${args}`);
+		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
 	}
 
@@ -109,21 +108,21 @@ async function clearTileClaim(discordId, args) {
 	
 	let clearClaimResult = await clearTile(userId, tileNumber);
 	if (clearClaimResult.rowCount == 0) {
-			console.error(`clearTileClaim() - failed to clear tile claim, ${util.inspect(clearClaimResult)}`);
+			console.error(`${logHead} failed to clear tile claim, ${util.inspect(clearClaimResult)}`);
 			return Promise.reject(new Error('Failed to clear tile claim'));
 	}
 	return `tile ${tileNumber} successfully cleared`;
 }
 
 async function clearAllTileClaims(msg) {
-	
+	const logHead = `${fileName}.${this.name} -`;
 	if(!roleCheck.isLeader(msg)) {
 		return `insufficient priviligies to clear all claims`;
 	}	
 	
 	let clearAllClaimsResult = await clearAllTiles();
 	if (clearAllClaimsResult.rowCount == 0) {
-			console.error(`clearAllTileClaims() - failed to clear tile claim, ${util.inspect(clearAllClaimsResult)}`);
+			console.error(`${logHead} failed to clear tile claim, ${util.inspect(clearAllClaimsResult)}`);
 			return Promise.reject(new Error('Failed to clear tile claim'));
 	}
 	return `${clearAllClaimsResult.rowCount} claims successfully cleared`;
@@ -131,9 +130,9 @@ async function clearAllTileClaims(msg) {
 
 
 async function getTileClaim(args) {
-	
+	const logHead = `${fileName}.${this.name} -`;
 	if (!args || args.length < 1) {
-		console.error(`getTileClaim() - missing argument, ${args}`);
+		console.error(`${logHead} missing argument, ${args}`);
 		return Promise.reject(new Error('Insufficient number of arguments'));
 	}
 		
@@ -177,10 +176,11 @@ async function getAllTileClaims() {
 }
 
 async function getUserId(discordId) {
+	const logHead = `${fileName}.${this.name} -`;
 	let result = await getUserIdByDiscordId(discordId);
 	
 	if (result.rowCount == 0 || !result.rows[0].id) {
-			console.error(`getUserId() - user not found, ${util.inspect(result)}`);
+			console.error(`${logHead} user not found, ${util.inspect(result)}`);
 			return Promise.reject(new Error('User not found'));
 	}
 	
@@ -188,10 +188,11 @@ async function getUserId(discordId) {
 }
 
 async function getUserName(userId) {
+	const logHead = `${fileName}.${this.name} -`;
 	let result = await getUsernameByUserId(userId);
 	
 	if (result.rowCount == 0 || !result.rows[0].user_name) {
-			console.error(`getUserName() - user not found, ${util.inspect(result)}`);
+			console.error(`${logHead} user not found, ${util.inspect(result)}`);
 			return Promise.reject(new Error('User not found'));
 	}
 	

@@ -5,7 +5,8 @@ const authToken = process.env.CRAICMEUP_TOKEN;
 const prefix = "!";
 const whoisTools = require('./commands/whois.js');
 const whois = whoisTools.whois;
-const tileManager = require('./commands/tiles.js');
+const tile = require('./commands/tiles.js');
+const flare = require('./commands/flare.js');
 const joker = require('./commands/joker.js');
 const stats = require('./commands/stats.js');
 const helpMsg = require('./tools/helper.js').mainHelp;
@@ -22,11 +23,15 @@ client.on('ready', () => {
 client.on('guildMemberAdd', member => {
     
     const channel = member.guild.channels.find(ch => ch.name === 'welcome');
-
     // channel wasn't found on this server
     if (!channel) return;
-
-    channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTAN: please add your ingame nick by using !iam <ingame nick>, thx!`);
+    
+	channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTAN: please add your ingame nick by using !iam <ingame nick>, thx!`);
+	
+	//notify the leaders/officers of a new member
+	const seriousChan = member.guild.channels.find(ch => ch.name === 'seriouscraic');
+	if (!seriousChan) return;
+	seriousChan.send(`@leaders we have a new member in the welcome channel. Please verify that it is a guild use and add the 'members' role to their account which will add them to the general channel.`);
 });
 
 client.on('message', msg => {
@@ -64,13 +69,20 @@ client.on('message', msg => {
             msg.react('🤐')
                 .catch(console.error);
         break;
+		case: 'flare':
+			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+				msg.reply(`flares can only be announced by guild members, sorry.`)
+					.catch(console.error);
+			}
+			flare.respond(msg, args).catch(console.error);
+			break;
 		case 'tiles':	
 		case 'tile':
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`claims for tiles can only be set by guild members, sorry.`)
 					.catch(console.error);
 			}
-			tileManager.respond(msg, args).catch(console.error);
+			tile.respond(msg, args).catch(console.error);
 			break;
 		case 'whois':
 			whois(msg, args).catch(console.error);
