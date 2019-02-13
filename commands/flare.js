@@ -33,7 +33,7 @@ async function respond(msg, args) {
 			break;
 		case 'invite':
 			sendInviteLink(msg, subArgs).catch(console.error);
-			//announce(msg, subArgs).catch(console.error);
+			announce(msg, subArgs).catch(console.error);
 			break;
 		default:
             await announce(msg, allArgs).catch(console.error);
@@ -63,7 +63,7 @@ async function sendInviteLink(msg, args) {
 	let response = `${inviteLink}\n\n`;
 	if (args) {
 		let comment = args.join(' ');
-		response += `\n\n: ${comment}`;
+		response += `\n ${comment}\n\n`;
 	}
 	msgRespond(msg, response);
 }
