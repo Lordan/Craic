@@ -60,7 +60,7 @@ async function announce(msg, args) {
 
 async function sendInviteLink(msg, args) {	
 	const logHead = `${fileName}.sendInviteLink() -`;
-	let response = `${inviteLink\n\n`;
+	let response = `${inviteLink}\n\n`;
 	if (args) {
 		let comment = args.join(' ');
 		reesponse += `\n\n: ${comment}`;
