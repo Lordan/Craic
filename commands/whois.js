@@ -36,7 +36,7 @@ async function whois(msg, args) {
 		console.log(`whois() - calling getIngameNickByDiscordId`);
 		let result = await getIngameNickByDiscordId(discordId);
 		if (result.rowCount > 0) {
-				replyMsg = `${searchParam}'s ingame nick is ${result.rows[0].ingame_nick}`;
+				replyMsg = `${discordId.username}'s ingame nick is ${result.rows[0].ingame_nick}`;
 		}
 	} else {
 		
