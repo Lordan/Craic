@@ -27,8 +27,8 @@ async function respond(msg, args) {
             msgRespond(msg, helpMsg);
             break;
 		case 'announce':
-			
-        break;
+			announce(msg).catch(console.error);
+			break;
 		default:
             await announce(msg, allArgs).catch(console.error);
 	}	
