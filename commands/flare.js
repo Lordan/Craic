@@ -43,9 +43,11 @@ async function announce(msg, args) {
 		return;
 	}
 	let announceMsg = `@here flare up, have fun and hit it hard!`;
-	let comment = args.join(' ');
 	
-	if (args) announceMsg += `\nComment: ${comment}`;
+	if (args) {
+		let comment = args.join(' ');
+		announceMsg += `\nComment: ${comment}`;
+	}
 	
 	generalChan.send(announceMsg).catch(console.error);
 }
