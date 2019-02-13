@@ -63,7 +63,7 @@ async function sendInviteLink(msg, args) {
 	let response = `${inviteLink}\n\n`;
 	if (args) {
 		let comment = args.join(' ');
-		reesponse += `\n\n: ${comment}`;
+		response += `\n\n: ${comment}`;
 	}
 	msgRespond(msg, response);
 }
