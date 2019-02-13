@@ -13,7 +13,8 @@ const helpMsg = require('./tools/helper.js').mainHelp;
 const roleCheck = require('./tools/roles.js').roleCheck;
 const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
-const thisGuild = "Craic";
+const thisGuild = require('./tools/texts.js').mainGuildName;
+const channels = require('./tools/channels.js');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -22,14 +23,14 @@ client.on('ready', () => {
 // event listener for new members
 client.on('guildMemberAdd', member => {
     
-    const channel = member.guild.channels.find(ch => ch.name === 'welcome');
+    const channel = member.guild.channels.find(ch => ch.name === channels.welcome);
     // channel wasn't found on this server
     if (!channel) return;
     
-	channel.send(`Welcome to the craic!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTANT: please add your ingame nick by using !iam your_ingame_nick, thx!`);
+	channel.send(`Welcome to ${thisGuild}!, ${member}\nYou can learn about our bots functionality by typing !help in this channel.\n\nIMPORTANT: please add your ingame nick by using !iam your_ingame_nick, thx!`);
 	
 	//notify the leaders/officers of a new member
-	const seriousChan = member.guild.channels.find(ch => ch.name === 'seriouscraic');
+	const seriousChan = member.guild.channels.find(ch => ch.name === channels.officers);
 	if (!seriousChan) return;
 	seriousChan.send(`@leaders ${member} joined the welcome channel. Please verify that it is a guild use and add the 'members' role to their account which will add them to the general channel.`);
 });
