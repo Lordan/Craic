@@ -6,6 +6,7 @@ const prefix = "!";
 const whoisTools = require('./commands/whois.js');
 const whois = whoisTools.whois;
 const tile = require('./commands/tiles.js');
+const link = require('./commands/link.js');
 const flare = require('./commands/flare.js');
 const joker = require('./commands/joker.js');
 const stats = require('./commands/stats.js');
@@ -120,6 +121,13 @@ client.on('message', msg => {
 			msg.reply(`careful, hot! ☕`)
 				.catch(console.error);
 		break;
+		case 'link':
+			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+				msg.reply(`short link only available to guild members, sorry.`)
+					.catch(console.error);
+			}
+			link.respond(msg, args).catch(console.error);
+			break;			
 		case 'help':
 			msg.reply(helpMsg)
                 .catch(console.error);
