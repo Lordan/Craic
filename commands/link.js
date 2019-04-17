@@ -34,7 +34,7 @@ async function respond(msg, args) {
 			sendInviteLink(msg, subArgs).catch(console.error);
 			break;
 		default:
-            await announce(msg, allArgs).catch(console.error);
+            msgRespond(msg, helpMsg);
 	}	
 }
 
