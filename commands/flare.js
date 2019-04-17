@@ -1,6 +1,6 @@
 const util = require('util');
 const helpMsg = require('../tools/helper.js').flareHelp;
-const inviteLink = require('../tools/texts.js').inviteLink;
+const inviteLinkMain = require('../tools/texts.js').inviteLinkMain;
 const channels = require('../tools/channels.js');
 const msgRespond = require('../tools/responder.js').respond;
 const defaultCmd = 'announce';
@@ -32,7 +32,7 @@ async function respond(msg, args) {
 			announce(msg).catch(console.error);
 			break;
 		case 'invite':
-			sendInviteLink(msg, subArgs).catch(console.error);
+			sendInviteLinkMain(msg, subArgs).catch(console.error);
 			announce(msg, subArgs).catch(console.error);
 			break;
 		default:
@@ -58,9 +58,9 @@ async function announce(msg, args) {
 	generalChan.send(announceMsg).catch(console.error);
 }
 
-async function sendInviteLink(msg, args) {	
-	const logHead = `${fileName}.sendInviteLink() -`;
-	let response = `${inviteLink}\n\n`;
+async function sendInviteLinkMain(msg, args) {	
+	const logHead = `${fileName}.sendInviteLinkMain() -`;
+	let response = `${inviteLinkMain}\n\n`;
 	if (args) {
 		let comment = args.join(' ');
 		response += `\n ${comment}\n\n`;

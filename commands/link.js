@@ -1,6 +1,6 @@
 const util = require('util');
 const helpMsg = require('../tools/helper.js').linkHelp;
-const inviteLink = require('../tools/texts.js').inviteLink;
+const inviteLinkMain = require('../tools/texts.js').inviteLinkMain;
 const statsLink = require('../tools/texts.js').statsLink;
 const msgRespond = require('../tools/responder.js').respond;
 const fileName = "link";
@@ -31,16 +31,16 @@ async function respond(msg, args) {
 			sendStatsLink(msg, subArgs).catch(console.error);
 			break;
 		case 'craic':
-			sendInviteLink(msg, subArgs).catch(console.error);
+			sendInviteLinkMain(msg, subArgs).catch(console.error);
 			break;
 		default:
             msgRespond(msg, helpMsg);
 	}	
 }
 
-async function sendInviteLink(msg, args) {	
-	const logHead = `${fileName}.sendInviteLink() -`;
-	let response = `${inviteLink}\n\n`;
+async function sendInviteLinkMain(msg, args) {	
+	const logHead = `${fileName}.sendInviteLinkMain() -`;
+	let response = `${inviteLinkMain}\n\n`;
 	if (args) {
 		let comment = args.join(' ');
 		response += `\n ${comment}\n\n`;
