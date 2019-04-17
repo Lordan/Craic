@@ -8,3 +8,4 @@ exports.mainGuildName = mainGuildName;
 exports.secondGuildName = secondGuildName;
 exports.inviteLinkMain = inviteLinkMain;
 exports.inviteLinkSecond = inviteLinkSecond;
+exports.statsLink = statsLink;
