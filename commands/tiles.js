@@ -68,7 +68,11 @@ async function respond(msg, args) {
 			});
         break;
 		default:
-            msgRespond(msg, `Unknown option\n${helpMsg}`);
+			await getAllTileClaims()
+				.then(res => {
+					msg.reply(res)
+					.catch(console.error);
+				});
 	}			
 }
 
