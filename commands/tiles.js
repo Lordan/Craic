@@ -19,7 +19,11 @@ async function respond(msg, args) {
 	
 	if (args === null || !(args instanceof Array) || args.length == 0) {
 		console.log(`${logHead} member: ${util.inspect(msg.member)}`);
-		msgRespond(msg, `No action provided\n${helpMsg}`);
+		await getAllTileClaims()
+				.then(res => {
+					msg.reply(res)
+					.catch(console.error);
+				});
 		return;
 	}
 		
@@ -68,11 +72,7 @@ async function respond(msg, args) {
 			});
         break;
 		default:
-			await getAllTileClaims()
-				.then(res => {
-					msg.reply(res)
-					.catch(console.error);
-				});
+            msgRespond(msg, `Unknown option\n${helpMsg}`);
 	}			
 }
 
