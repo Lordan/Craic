@@ -35,7 +35,7 @@ async function whois(msg, args) {
 	if (searchParam== "all") {
 		await getAllUsers()
 				.then(res => {
-					msg.reply(res)
+					respond(msg, res)
 					.catch(console.error);
 				});
 	}
