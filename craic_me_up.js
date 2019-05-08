@@ -16,8 +16,8 @@ const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
 const thisGuild = require('./tools/texts.js').mainGuildName;
 const channels = require('./tools/channels.js');
-const setActive = whoisTools.setActive;
-const setInactive = whoisTools.setInactive;
+const setUserActive = whoisTools.setActive;
+const setUserInactive = whoisTools.setInactive;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
