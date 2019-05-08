@@ -6,7 +6,7 @@ const getIngameNickByDiscordId = dataHandler.getIngameNickByDiscordId;
 const getIngameNickByUsername = dataHandler.getIngameNickByUsername;
 const getUsernameByIngameNick = dataHandler.getUsernameByIngameNick;
 const getAllActiveUsers = dataHandler.getAllActiveUsers;
-const setActivity - dataHandler.setActivity;
+const setActivity = dataHandler.setActivity;
 const nicksFile = '../data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
