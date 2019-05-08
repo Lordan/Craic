@@ -7,7 +7,7 @@ exports.userQueries = {
 	'setIngameNick'				: 	'INSERT INTO users (discord_id, user_name, ingame_nick, guild) VALUES ($1, $2, $3, $4) ON CONFLICT (discord_id) DO UPDATE SET ingame_nick = EXCLUDED.ingame_nick',
 	'getAllUsers'				:	'SELECT u.user_name, u.ingame_nick FROM users AS u',
 	'getAllActiveUsers'			:	'SELECT u.user_name, u.ingame_nick FROM users AS u WHERE active = true',
-	'setActivity'				:	'UPDATE SET active = $2 WHERE user_name = $1'
+	'setActivity'				:	'UPDATE users SET active = $2 WHERE user_name = $1'
 }
 
 exports.statsQueries = {
