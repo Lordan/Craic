@@ -132,11 +132,11 @@ function changeActivityStatus(active) {
 		
 		setActivity(userName, active)
 		.then(res => {
-			if (res.rowCount == 0) {
-				replyMsg = `Failed to set activity for ${userName} to ${active}`;
-			}
 			console.log(`Activity set, result set: ${util.inspect(res)}`);
 			replyMsg = `Set activity to ${active} for user ${userName}`;
+			if (res.rowCount == 0) {
+				replyMsg = `Failed to set activity for ${userName} to ${active}`;
+			}			
 			respond(msg, replyMsg);
 			return;
 		})
