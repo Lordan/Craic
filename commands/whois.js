@@ -5,6 +5,7 @@ const setIngameNick = dataHandler.setIngameNick;
 const getIngameNickByDiscordId = dataHandler.getIngameNickByDiscordId;
 const getIngameNickByUsername = dataHandler.getIngameNickByUsername;
 const getUsernameByIngameNick = dataHandler.getUsernameByIngameNick;
+const getAllUsers = dataHandler.getAllUsers;
 const nicksFile = '../data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
@@ -29,6 +30,14 @@ async function whois(msg, args) {
 	if (searchParam == "help" || searchParam == "?") {
 		respond(msg, helpMsg);
 		return;
+	}
+	
+	if (searchParam== "all") {
+		await getAllUsers()
+				.then(res => {
+					msg.reply(res)
+					.catch(console.error);
+				});
 	}
 	
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
@@ -106,6 +115,22 @@ function addNick(msg, args) {
 			return;
 		})
 		.catch(console.error);
+}
+
+async function getAllUsers(msg) {
+	
+	let allUsersResult = await getAllUsers();
+	if (allUsersResult.rowCount == 0 || !allUsersResult.rows[0].user_name) {
+			return `No users found!`;
+	}
+	let users = "";
+	for (row of allUsersResult.rows) {
+		const userName = row.user_name;
+		const ingameNick = row.ingame_nick;
+		users += `\t${userName} - ingame nick ${ingameNick}\n`;
+	}
+	
+	return `following users are currently registered:\n ${users}`;
 }
 
 exports.whois = whois;

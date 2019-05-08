@@ -75,6 +75,7 @@ client.on('message', msg => {
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`flares can only be announced by guild members, sorry.`)
 					.catch(console.error);
+				break;
 			}
 			flare.respond(msg, args).catch(console.error);
 			break;
@@ -83,26 +84,21 @@ client.on('message', msg => {
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`claims for tiles can only be set by guild members, sorry.`)
 					.catch(console.error);
+				break;
 			}
 			tile.respond(msg, args).catch(console.error);
 			break;
 		case 'whois':
+			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
+				msg.reply(`whois is only available to guild members, sorry.`)
+					.catch(console.error);
+				break;
+			}
 			whois(msg, args).catch(console.error);
-		break;
+			break;
 		case 'iam':
 			addNick(msg, args);
 		break;
-		case 'reverseLookup':
-			msg.reply(`this command was removed, please use '!whois <ingame nick>' instead`)
-                .catch(console.error);
-		break;	
-		case 'stats':
-			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
-				msg.reply(`stats command are only available for guild members, sorry.`)
-					.catch(console.error);
-			}
-			stats.respond(msg, args).catch(console.error);
-		break;	
 		case 'guinness':
 		case 'cider':
 		case 'beer':
@@ -125,6 +121,7 @@ client.on('message', msg => {
 			if(!roleCheck.isMember(msg) && !roleCheck.isLeader(msg)) {
 				msg.reply(`short link only available to guild members, sorry.`)
 					.catch(console.error);
+				break;
 			}
 			link.respond(msg, args).catch(console.error);
 			break;			

@@ -57,6 +57,17 @@ function getUsernameByUserId(userId) {
 	return promise;	
 }
 
+function getAllUsers() {
+	console.log(`getAllUsers() - start`);
+	let promise = new Promise((resolve, reject) => {
+		const query = {
+			text : userQueries.getgetAllUsers
+		};
+		executeQuery(resolve, reject, query);		
+	});	
+	return promise;	
+}
+
 function getUserIdByDiscordId(discordId) {
 	console.log(`getUserIdByDiscordId() - received ${discordId}`);
 	let promise = new Promise((resolve, reject) => {
@@ -195,3 +206,4 @@ exports.clearTile = clearTile;
 exports.clearAllTiles = clearAllTiles;
 exports.getTile = getTile;
 exports.getAllTiles = getAllTiles;
+exports.getAllUsers = getAllUsers;
