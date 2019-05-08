@@ -36,9 +36,8 @@ async function whois(msg, args) {
 	if (searchParam== "all") {
 		await showAllUsers()
 				.then(res => {
-					respond(msg, res)
-					.catch(console.error);
-				});
+				msgRespond(msg, res)
+			});
 	}
 	
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
