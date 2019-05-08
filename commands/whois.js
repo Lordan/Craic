@@ -38,6 +38,7 @@ async function whois(msg, args) {
 				.then(res => {
 				respond(msg, res)
 			});
+		return;
 	}
 	
 	if (msg.mentions && msg.mentions.users && msg.mentions.users.size > 0) {
