@@ -61,7 +61,7 @@ function getAllUsers() {
 	console.log(`getAllUsers() - start`);
 	let promise = new Promise((resolve, reject) => {
 		const query = {
-			text : userQueries.getgetAllUsers
+			text : userQueries.getAllUsers
 		};
 		executeQuery(resolve, reject, query);		
 	});	
