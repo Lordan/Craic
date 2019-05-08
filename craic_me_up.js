@@ -101,7 +101,7 @@ client.on('message', msg => {
 		case 'iam':
 			addNick(msg, args);
 			break;
-		case 'setActive':
+		case 'setactive':
 			if(!roleCheck.isLeader(msg)) {
 				msg.reply(`changing activity status is only available to leaders, sorry.`)
 					.catch(console.error);
@@ -109,7 +109,7 @@ client.on('message', msg => {
 			}
 			setUserActive(msg, args);
 			break;
-		case 'setInactive':
+		case 'setinactive':
 			if(!roleCheck.isLeader(msg)) {
 				msg.reply(`changing activity status is only available to leaders, sorry.`)
 					.catch(console.error);
