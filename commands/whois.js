@@ -33,7 +33,7 @@ async function whois(msg, args) {
 	}
 	
 	if (searchParam== "all") {
-		await getAllUsers()
+		await showAllUsers()
 				.then(res => {
 					respond(msg, res)
 					.catch(console.error);
@@ -117,7 +117,7 @@ function addNick(msg, args) {
 		.catch(console.error);
 }
 
-async function getAllUsers(msg) {
+async function showAllUsers(msg) {
 	
 	let allUsersResult = await getAllUsers();
 	if (allUsersResult.rowCount == 0 || !allUsersResult.rows[0].user_name) {
