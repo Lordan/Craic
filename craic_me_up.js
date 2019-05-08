@@ -16,6 +16,8 @@ const addNick = whoisTools.addNick;
 const reverseLookup = whoisTools.reverseLookup;
 const thisGuild = require('./tools/texts.js').mainGuildName;
 const channels = require('./tools/channels.js');
+const setActive = whoisTools.setActive;
+const setInactive = whoisTools.setInactive;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -98,7 +100,23 @@ client.on('message', msg => {
 			break;
 		case 'iam':
 			addNick(msg, args);
-		break;
+			break;
+		case 'setActive':
+			if(!roleCheck.isLeader(msg)) {
+				msg.reply(`changing activity status is only available to leaders, sorry.`)
+					.catch(console.error);
+				break;
+			}
+			setUserActive(msg, args);
+			break;
+		case 'setInactive':
+			if(!roleCheck.isLeader(msg)) {
+				msg.reply(`changing activity status is only available to leaders, sorry.`)
+					.catch(console.error);
+				break;
+			}
+			setUserInactive(msg, args);
+			break;
 		case 'guinness':
 		case 'cider':
 		case 'beer':

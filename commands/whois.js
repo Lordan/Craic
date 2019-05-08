@@ -5,7 +5,8 @@ const setIngameNick = dataHandler.setIngameNick;
 const getIngameNickByDiscordId = dataHandler.getIngameNickByDiscordId;
 const getIngameNickByUsername = dataHandler.getIngameNickByUsername;
 const getUsernameByIngameNick = dataHandler.getUsernameByIngameNick;
-const getAllUsers = dataHandler.getAllUsers;
+const getAllActiveUsers = dataHandler.getAllActiveUsers;
+const setActivity - dataHandler.setActivity;
 const nicksFile = '../data/nicks.json'
 const usrPrefix = '@';
 const usrPostfix = '#';
@@ -117,9 +118,36 @@ function addNick(msg, args) {
 		.catch(console.error);
 }
 
+function changeActivityStatus(active) {
+	return function(msg, args) {
+		if (msg === null || msg.author === null) return;
+		let replyMsg = '';
+		if (args === null || !(args instanceof Array) || args.length == 0) {
+			console.error("changeActivityStatus(): args check failed, is Array: " + (args instanceof Array) + " length: " + args.length);
+			replyMsg = `No user provided to change activity status to ${active}`;
+			respond(msg, replyMsg);
+			return;
+		}
+		let userName = args[0];
+		
+		setActivity(userName, active)
+		.then(res => {
+			if (res.rowCount == 0) {
+				replyMsg = `Failed to set activity for ${userName} to ${active}`;
+			}
+			console.log(`Activity set, result set: ${util.inspect(res)}`);
+			replyMsg = `Set activity to ${active} for user ${userName}`;
+			respond(msg, replyMsg);
+			return;
+		})
+		.catch(console.error);
+		
+	}
+}
+
 async function showAllUsers(msg) {
 	
-	let allUsersResult = await getAllUsers();
+	let allUsersResult = await getAllActiveUsers();
 	if (allUsersResult.rowCount == 0 || !allUsersResult.rows[0].user_name) {
 			return `No users found!`;
 	}
@@ -135,3 +163,5 @@ async function showAllUsers(msg) {
 
 exports.whois = whois;
 exports.addNick = addNick;
+exports.setInactive = changeActivityStatus(false);
+exports.setActive = changeActivityStatus(true);

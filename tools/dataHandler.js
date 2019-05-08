@@ -68,6 +68,17 @@ function getAllUsers() {
 	return promise;	
 }
 
+function getAllActiveUsers() {
+	console.log(`getAllActiveUsers() - start`);
+	let promise = new Promise((resolve, reject) => {
+		const query = {
+			text : userQueries.getAllActiveUsers
+		};
+		executeQuery(resolve, reject, query);		
+	});	
+	return promise;	
+}
+
 function getUserIdByDiscordId(discordId) {
 	console.log(`getUserIdByDiscordId() - received ${discordId}`);
 	let promise = new Promise((resolve, reject) => {
@@ -91,6 +102,20 @@ function setIngameNick(discordId, username, ingameNick, guild) {
 		const query = {
 			text : userQueries.setIngameNick,
 			values: [discordId, username, ingameNick, guild]
+		};
+		executeQuery(resolve, reject, query);		
+	});
+	
+	return promise;
+}
+
+function setActivity(username, active) {
+	console.log(`setActivity() - received [${username}, ${active}] `);
+	let promise = new Promise((resolve, reject) => {
+		if (username === null || username.trim().length < 1) reject('No username given');
+		const query = {
+			text : userQueries.setActivity,
+			values: [username, active]
 		};
 		executeQuery(resolve, reject, query);		
 	});
@@ -207,3 +232,5 @@ exports.clearAllTiles = clearAllTiles;
 exports.getTile = getTile;
 exports.getAllTiles = getAllTiles;
 exports.getAllUsers = getAllUsers;
+exports.getAllActiveUsers = getAllActiveUsers;
+exports.setActivity = setActivity;
